@@ -1,0 +1,139 @@
+	select[readonly] {
+	  background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+	  pointer-events: none;
+	  touch-action: none;
+	}
+	
+	hr.space
+	{
+		 margin-top: 0px; 
+		 margin-bottom: 0px;
+		 margin-left: 0px;
+		 border-color: #d08600;
+	}
+	
+	b.titulo{
+		font-family: NexusSans, Helvetica, Arial, Lucida Sans Unicode, Microsoft Sans Serif, Segoe UI Symbol, STIXGeneral, Cambria Math, Arial Unicode MS, sans-serif;
+		font-size:20px;
+		color: #031f38;
+	}
+	
+	span
+	{
+	font-size:18px;
+    color: #171717;
+	font-family: Times New Roman;
+	}
+	
+	footer.rodape{
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		border-radius: 5px;
+		background-color: #D8D7D7;
+		/*color: green;*/
+	}
+	
+	p.destaque
+	{
+		font-size: 30px;
+		color: orange;
+	}
+	
+	p.agradecimento
+	{
+		font-size: 25px;
+		color: #23238E;
+		text
+	}		p.introducao	{		color: #000000;		font-family: "Arial", Times New Roman, serif;				font-size:1.3vw;	}		p.repositorio	{		color: #35BA43;		font-size:75px;	}		ul.introducao	{		color: #000000;		font-family: "Arial", Times New Roman, serif;				font-size:1.3vw;	}
+
+	.table_form
+	{
+		/*border: 1px solid black;*/
+		border-style: solid;
+		/*border-bottom-width: 1px;
+		border-bottom-color: grey;*/
+		border-top-width: 1px;
+		border-right-width: 1px;
+		border-left-width: 1px;
+	}
+	.table_busca
+	{
+		border-style: solid;
+		border-bottom-width: 1px;
+		border-top-width: 0;
+		border-right-width: 1px;
+		border-left-width: 1px;
+	}
+
+	#busca
+	{
+		margin-top:0px;
+		margin-left: 0%;
+		position : absolute;
+		width : 100%;
+		height: 25%;
+	}
+	
+	#espaco
+	{
+		width : 100%;
+		height: 25%;
+	}
+		
+	#banners
+	{
+		margin-top:30%;
+		margin-left: 0%;
+		position : absolute;
+		width : 100%;
+		background-color:#ffffff;
+	}
+		
+	#borda
+	{ 
+		border:1px #eeeeee solid;
+	}
+
+	#rodape 
+	{
+		width: 60%;
+		bottom: 0;
+		background:#A1A1A4;
+		left: 25%; 
+		right: 25%;
+		border-radius: 40px;
+	}	
+
+	#padding
+	{
+		padding-bottom:5%;
+	}
+	
+	s
+	{
+		text-decoration: underline;
+	}
+	
+	#login_form
+	{
+		border: 5px;
+		width: 60%;
+		position: absolute;
+		background:#10D129;
+		left: 25%; 
+		right: 25%;
+		
+	}
+	
+	.obs
+	{
+		font-size:20px;
+		padding:1px;
+		width:30%;
+		color:#0B1587;
+		font-weight: bold;
+	}
+
+	
