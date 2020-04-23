@@ -28,7 +28,7 @@
     <script>w3.includeHTML();</script>
   
 <?php	
-	include('class/conectando.php');
+	include('class/conectar_banco.php');
 
 	$query_genero = mysql_query("SELECT * FROM genero");
 	$query_tipo = mysql_query("SELECT * FROM tipo");

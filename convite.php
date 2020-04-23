@@ -66,7 +66,7 @@
   
 <?php 	
 
-	include('class/conectando.php');
+	include('class/conectar_banco.php');
 	
 	$query = mysql_query("SELECT * FROM convites");
 

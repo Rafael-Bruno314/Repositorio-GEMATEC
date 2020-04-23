@@ -34,7 +34,7 @@
 
 <?php 	
 
-	include('class/conectando.php');
+	include('class/conectar_banco.php');
 	include('ano_config.php');
 	
 	$query = mysql_query("SELECT * FROM genero");
@@ -95,7 +95,7 @@ ini_set(“display_errors”, 0);
 	
 <?php
 
-include('class/conectando.php');
+include('class/conectar_banco.php');
 
 // Recuperamos a ação enviada pelo formulário
 

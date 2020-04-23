@@ -35,7 +35,7 @@
 </head>
   
 <?php 	
-	include('class/conectando.php');
+	include('class/conectar_banco.php');
 	include('ano_config.php');
 ?>
   
