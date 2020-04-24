@@ -7,10 +7,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     
-    <link rel="icon" href="favicon.ico">
-
     <title>Banners/Pôsteres GEMATEC</title>
 
+    <link rel="icon" href="favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	  <link href="css/estilo.css" rel="stylesheet">
@@ -28,12 +27,9 @@
   </head>
 
   <body>	
-    <!-- Para colocar a navbar restrita -->	
     <div w3-include-html="css/navbar_publica.html"></div> 
     <script>w3.includeHTML();</script>
-
     <div class="container">
-    
       <h1>Banners/Pôsteres GEMATEC</h1>
       <hr>
 
@@ -97,10 +93,9 @@
     $ano = trim($_POST['ano']);
     $autor = (trim($_POST['autor']));
     $palavras_chave = (trim($_POST['palavras_chave']));
-    
 
     if ($ano == "ano") {
-        $sql = mysql_query("SELECT * FROM usuarios WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!
+      $sql = mysql_query("SELECT * FROM usuarios WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!
     }
     else {
       $sql = mysql_query("SELECT * FROM usuarios WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!!
@@ -111,8 +106,10 @@
         
     // Se houver pelo menos um registro, exibe-o
     if ($numRegistros != 0) {
+
       while ($usuario = mysql_fetch_object($sql)) {
-		  	if($usuario->ano == 0){
+        
+        if($usuario->ano == 0){
           $marca= "______";
         }
 				else{
@@ -141,10 +138,10 @@
 ?>
 
 <html>
-<body>
-	<!-- Para colocar a navbar restrita -->
-	<div w3-include-html="css/rodape.html"></div> 
-	<!-- Para colocar a navbar restrita -->
-	<script>w3.includeHTML();</script>
-</body>
+  <body>
+	  <!-- Para colocar a navbar restrita -->
+	  <div w3-include-html="css/rodape.html"></div> 
+	  <!-- Para colocar a navbar restrita -->
+	  <script>w3.includeHTML();</script>
+  </body>
 </html>
