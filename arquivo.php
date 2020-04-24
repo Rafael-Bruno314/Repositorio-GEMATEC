@@ -88,71 +88,71 @@
         <button type="submit" class="btn btn-primary" value="Buscar">Buscar</button> 
       </form>
 	    <hr>
+
+      <?php
+        error_reporting(0);
+        ini_set(“display_errors”, 0);
+      ?>
+
+      <?php
+        // Recuperamos a ação enviada pelo formulário
+        $a = $_GET['a'];
+
+        // Verificamos se a ação é de busca
+        if ($a == "buscar") {
+          $titulo = (trim($_POST['titulo']));
+          $autor = (trim($_POST['autor']));
+          $palavras_chave = (trim($_POST['palavras_chave']));
+          $ano = trim($_POST['ano']);
+          $tipo = (trim($_POST['tipo']));
+      
+          if ($tipo == "Todos os tipos" || $ano == "Ano de Publicação") {
+
+            if ($tipo == "Todos os tipos") {
+              $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
+            }
+
+            if ($ano == "Ano de Publicação") {
+              $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' AND tipo LIKE '%" . $tipo . "%' ORDER BY titulo");
+            }
+
+            if ($tipo == "Todos os tipos" && $ano == "Ano de Publicação") {
+              $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
+            }
+          }
+          else {
+            $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND ano LIKE '%" . $ano . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' AND tipo LIKE '%" . $tipo . "%' ORDER BY titulo");
+          }
+          
+          // Descobrimos o total de registros encontrados
+          $numRegistros = mysql_num_rows($sql);
+          // Se houver pelo menos um registro, exibe-o
+          if ($numRegistros != 0) {
+            while ($arquivos = mysql_fetch_object($sql)) {
+              echo "<div class='col-sm-6 col-md-12'>";
+              echo "<div class='thumbnail'>";
+              echo "<div class='caption'>";
+              echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . ($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . ($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
+              echo "<p><a href='Arquivos/" . $arquivos->arquivo . "' target='_blank'' class='btn btn-primary' role='button'>Abrir</a> <a href='Arquivos/" . $arquivos->arquivo . "' download=" . ($arquivos->titulo) . " class='btn btn-default' role='button'>Download</a></p>";
+              echo "</div>";
+              echo "</div>";
+              echo "</div>";
+            }
+          }
+          else {
+            echo "<h1> Nenhum arquivo foi encontrado </h1>";
+          }
+        }
+      ?>
+
+      <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
+      <script src="js/bootstrap.min.js"></script>
+      <!-- Para colocar a navbar restrita -->
+      <div w3-include-html="css/rodape.html"></div> 
+      <!-- Para colocar a navbar restrita -->
+      <script>w3.includeHTML();</script>
     </div>
-
-    <?php
-      error_reporting(0);
-      ini_set(“display_errors”, 0);
-    ?>
-
-    <?php
-      // Recuperamos a ação enviada pelo formulário
-      $a = $_GET['a'];
-
-      // Verificamos se a ação é de busca
-      if ($a == "buscar") {
-        $titulo = (trim($_POST['titulo']));
-        $autor = (trim($_POST['autor']));
-        $palavras_chave = (trim($_POST['palavras_chave']));
-        $ano = trim($_POST['ano']);
-        $tipo = (trim($_POST['tipo']));
-    
-        if ($tipo == "Todos os tipos" || $ano == "Ano de Publicação") {
-
-          if ($tipo == "Todos os tipos") {
-            $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
-          }
-
-          if ($ano == "Ano de Publicação") {
-            $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' AND tipo LIKE '%" . $tipo . "%' ORDER BY titulo");
-          }
-
-          if ($tipo == "Todos os tipos" && $ano == "Ano de Publicação") {
-            $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
-          }
-        }
-        else {
-          $sql = mysql_query("SELECT * FROM arquivos WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND ano LIKE '%" . $ano . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' AND tipo LIKE '%" . $tipo . "%' ORDER BY titulo");
-        }
-        
-        // Descobrimos o total de registros encontrados
-        $numRegistros = mysql_num_rows($sql);
-        // Se houver pelo menos um registro, exibe-o
-        if ($numRegistros != 0) {
-          while ($arquivos = mysql_fetch_object($sql)) {
-            echo "<div class='col-sm-6 col-md-12'>";
-            echo "<div class='thumbnail'>";
-            echo "<div class='caption'>";
-            echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . ($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . ($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
-            echo "<p><a href='Arquivos/" . $arquivos->arquivo . "' target='_blank'' class='btn btn-primary' role='button'>Abrir</a> <a href='Arquivos/" . $arquivos->arquivo . "' download=" . ($arquivos->titulo) . " class='btn btn-default' role='button'>Download</a></p>";
-            echo "</div>";
-            echo "</div>";
-            echo "</div>";
-          }
-        }
-        else {
-          echo "<h1> Nenhum arquivo foi encontrado </h1>";
-        }
-      }
-    ?>
-
-    <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
-    <script src="js/bootstrap.min.js"></script>
-  	<!-- Para colocar a navbar restrita -->
-	  <div w3-include-html="css/rodape.html"></div> 
-	  <!-- Para colocar a navbar restrita -->
-	  <script>w3.includeHTML();</script>
   </body>
 </html>

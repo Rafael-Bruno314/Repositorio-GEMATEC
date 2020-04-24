@@ -32,31 +32,32 @@
 
     .bgimg {
       background-image: url('construction.jpg');
-      background-color: pink;
-      height: 80%;
+      background-color: #ffffff;
+      height: 90%;
       background-position: center;
       background-size: cover;
       position: relative;
       color: black;
       font-family: "Arial Black", Courier, monospace;
       font-size: 35px;
+      margin-top: -1.2%;
     }
 
     .topleft {
       position: absolute;
       top: 0;
-      left: 16px;
+      left: 0px;
     }
 
     .bottomleft {
       position: absolute;
       bottom: 0;
-      left: 16px;
+      left: 0px;
     }
 
     .middle {
       position: absolute;
-      top: 50%;
+      top: 10%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
@@ -65,6 +66,11 @@
     hr {
       margin: auto;
       width: 40%;
+    }
+
+    .aviso {
+      font-size: 100%;
+      color: #200D39;
     }
 
   </style>
@@ -79,7 +85,7 @@
       </div>
 
       <div class="middle">
-        <h1>Esta página está em construção.</h1>
+        <p class = "aviso">Esta página está em construção.</p>
         <hr>
       </div>
 
