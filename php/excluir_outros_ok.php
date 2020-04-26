@@ -7,6 +7,9 @@
 	header("Pragma: no-cache");
 	header("Content-Type: text/html; charset=utf-8",true);
 
+	error_reporting(0);
+  ini_set(“display_errors”, 0);
+
 	$tabela = $_GET["tabela"];
 	$id = $_GET["id"];
 	$deletar = "DELETE FROM `".$tabela."` WHERE id = '$id'";

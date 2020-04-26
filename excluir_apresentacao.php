@@ -15,7 +15,7 @@
 <?php
 	$query  = mysql_query("SELECT * FROM apresentacoes");
 	$query2 = mysql_query("SELECT * FROM apresentacoes");
-	$query_mudar = mysql_query("SELECT * FROM apresentacoes");
+	$query_mudar = mysql_query("SELECT * FROM apresentacoes ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +68,7 @@
 						<select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
 							<option value="">Escolha o título da obra que deseja alterar</option>
 								<?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-									<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo ($titulo_muda['id']); echo " - ";echo ($titulo_muda['titulo'])?></option>
+									<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo utf8_encode($titulo_muda['titulo'])?></option>
 								<?php } ?>
 						</select>
 					</div>

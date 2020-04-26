@@ -5,7 +5,7 @@
 <?php
   include('class/conectar_banco.php');
   $query = mysql_query("SELECT * FROM convites");
-  $query_conv = mysql_query("SELECT * FROM convites");
+  $query_conv = mysql_query("SELECT * FROM convites ");
 ?>
 
 <?php
@@ -139,24 +139,24 @@
 	  <noscript>Desculpe, mas seu navegador não suporta <b>JavaScript</b>, ou ele pode estar desabilitado! Sua experiência com esse sistema ficará seriamente afetada!</noscript>
 	
   </head>
-  <style>        
-    b.destaque_ano {
-      font-size: 25px;
-      color: yellow;
-    }
-    
-    b.destaque_mes {
-      font-size: 25px;
-      color: orange;
-      padding-left:3%;
-    }
-    
-    b.destaque_dia {
-      font-size: 25px;
-      color: violet;
-      padding-left:6%;
-    }
-  </style>
+  <style>		
+		b.destaque_ano {
+			font-size: 25px;
+			color: #652E79;
+		}
+
+		b.destaque_mes {
+			font-size: 25px;
+			color: #E6447D;
+			padding-left:3%;
+		}
+		
+		b.destaque_dia {
+			font-size: 25px;
+			color: #586DF4;
+			padding-left:6%;
+		}
+	</style>
   <body>
     <div w3-include-html="css/navbar_restrita.html"></div> 
     <script>w3.includeHTML();</script>
@@ -168,7 +168,10 @@
           <div class="panel-body">
 
             <p><div class="form-group">
-              <label><h4><u>Código do convite a ser alterado:</u></h4></label>
+              <label><h4>
+                <u>Código do convite a ser alterado:</u>
+                <a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="O código se encontra nas amostras abaixo">?</a> 
+              </h4></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
               <select class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
                 <option>Selecione</option>
                   <?php while ($prod = mysql_fetch_array($query_conv)) { ?>
@@ -271,118 +274,118 @@
       <hr/>
 
       <h1>Convites Cadastrados no Banco de Dados</h1>
-    </div>
 
-    <?php
-      $ano = mysql_query("SELECT DISTINCT ano FROM convites ORDER BY ano DESC;");
-    ?>
-    <div class="panel panel-primary">
-      <div class="panel-body">
-                
-        <details> <!--Como eu consegui fazer isso?!!!-->
-          <?php
-            while ($ano_array = mysql_fetch_array($ano)) {
-          ?>
-              <summary>
-                <?php
-                echo "<b class='destaque_ano'>" . $ano_array['ano'] . "</b>";
-                ?>
-              </summary>
-              <?php
-                $mes_select = mysql_query("SELECT DISTINCT mes FROM convites WHERE `ano` =" . $ano_array[0]);
-              ?> 
-              <?php
-                while ($mes_array = mysql_fetch_array($mes_select)) {
-              ?>
-                  <?php
-                    if ($mes_array['mes'] == 1) {
-                        $mes = "Janeiro";
-                    }
-                    if ($mes_array['mes'] == 2) {
-                        $mes = "Fevereiro";
-                    }
-                    if ($mes_array['mes'] == 3) {
-                        $mes = "Março";
-                    }
-                    if ($mes_array['mes'] == 4) {
-                        $mes = "Abril";
-                    }
-                    if ($mes_array['mes'] == 5) {
-                        $mes = "Maio";
-                    }
-                    if ($mes_array['mes'] == 6) {
-                        $mes = "Junho";
-                    }
-                    if ($mes_array['mes'] == 7) {
-                        $mes = "Julho";
-                    }
-                    if ($mes_array['mes'] == 8) {
-                        $mes = "Agosto";
-                    }
-                    if ($mes_array['mes'] == 9) {
-                        $mes = "Setembro";
-                    }
-                    if ($mes_array['mes'] == 10) {
-                        $mes = "Outubro";
-                    }
-                    if ($mes_array['mes'] == 11) {
-                        $mes = "Novembro";
-                    }
-                    if ($mes_array['mes'] == 12) {
-                        $mes = "Dezembro";
-                    }
-                  ?>
-
-              <details>
+      <?php
+        $ano = mysql_query("SELECT DISTINCT ano FROM convites ORDER BY ano DESC;");
+      ?>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+                  
+          <details> <!--Como eu consegui fazer isso?!!!-->
+            <?php
+              while ($ano_array = mysql_fetch_array($ano)) {
+            ?>
                 <summary>
                   <?php
-                    echo "<b class='destaque_mes'>" . $mes . "</b>";
+                  echo "<b class='destaque_ano'>" . $ano_array['ano'] . "</b>";
                   ?>
                 </summary>
-                
                 <?php
-                  $dia_select = mysql_query("SELECT DISTINCT dia FROM convites WHERE `ano` =" . $ano_array[0] . "&& `mes` =" . $mes_array[0]);
-                ?>
+                  $ordena_mes = "SELECT DISTINCT mes FROM convites WHERE `ano` =".$ano_array[0]." ORDER BY mes ASC";
+							    $mes_select = mysql_query($ordena_mes);
+                ?> 
                 <?php
-                  $conv = mysql_query("SELECT * FROM convites WHERE `ano` =" . $ano_array[0] . "&& `mes` =" . $mes_array[0]);
+                  while ($mes_array = mysql_fetch_array($mes_select)) {
                 ?>
-                <?php
-                  while ($dia_array = mysql_fetch_array($dia_select)) {
-                ?>
-                <?php
-                  $convite = mysql_fetch_object($conv);
-                ?>
-                <?php
-                  echo "<a href='Convites/" . $convite->convite . " 'target='_blank'' ><b class='destaque_dia'> Código " . $convite->id . ": " . $dia_array['dia'] . " de " . $mes . "<br></a></b>";
-                ?>
+                    <?php
+                      if ($mes_array['mes'] == 1) {
+                          $mes = "Janeiro";
+                      }
+                      if ($mes_array['mes'] == 2) {
+                          $mes = "Fevereiro";
+                      }
+                      if ($mes_array['mes'] == 3) {
+                          $mes = "Março";
+                      }
+                      if ($mes_array['mes'] == 4) {
+                          $mes = "Abril";
+                      }
+                      if ($mes_array['mes'] == 5) {
+                          $mes = "Maio";
+                      }
+                      if ($mes_array['mes'] == 6) {
+                          $mes = "Junho";
+                      }
+                      if ($mes_array['mes'] == 7) {
+                          $mes = "Julho";
+                      }
+                      if ($mes_array['mes'] == 8) {
+                          $mes = "Agosto";
+                      }
+                      if ($mes_array['mes'] == 9) {
+                          $mes = "Setembro";
+                      }
+                      if ($mes_array['mes'] == 10) {
+                          $mes = "Outubro";
+                      }
+                      if ($mes_array['mes'] == 11) {
+                          $mes = "Novembro";
+                      }
+                      if ($mes_array['mes'] == 12) {
+                          $mes = "Dezembro";
+                      }
+                    ?>
+
+                <details>
+                  <summary>
+                    <?php
+                      echo "<b class='destaque_mes'>" . $mes . "</b>";
+                    ?>
+                  </summary>
+                  
+                  <?php
+                    $dia_select = mysql_query("SELECT DISTINCT dia FROM convites WHERE `ano` =" . $ano_array[0] . "&& `mes` =" . $mes_array[0]);
+                  ?>
+                  <?php
+                    $conv = mysql_query("SELECT * FROM convites WHERE `ano` =" . $ano_array[0] . "&& `mes` =" . $mes_array[0]);
+                  ?>
+                  <?php
+                    while ($dia_array = mysql_fetch_array($dia_select)) {
+                  ?>
+                  <?php
+                    $convite = mysql_fetch_object($conv);
+                  ?>
+                  <?php
+                    echo "<a href='Convites/" . $convite->convite . " 'target='_blank'' ><b class='destaque_dia'> Código " . $convite->id . ": " . $dia_array['dia'] . " de " . $mes . "<br></a></b>";
+                  ?>
+                  <?php
+                    }
+                  ?>
+                </details>
                 <?php
                   }
                 ?>
-              </details>
-              <?php
-                }
-              ?>
-        </details>
-        <br><br>
-        
-        <details>
-          <?php
-            }
-          ?>
-        <summary></summary>
-        </details>
+          </details>
+          <br><br>
+          
+          <details>
+            <?php
+              }
+            ?>
+          <summary></summary>
+          </details>
+        </div>
       </div>
+      <br><br>
+      
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+      <script src="js/bootstrap.min.js"></script>
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <script src="js/ie10-viewport-bug-workaround.js"></script>
     </div>
-    <br><br>
-    
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-    
   </body>
 </html>

@@ -7,7 +7,6 @@
 
     <title>Artigos, Trabalhos & Resumos GEMATEC</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	  <link href="css/estilo.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -41,6 +40,10 @@
   <?php 	
     include('class/conectar_banco.php');
     $query = mysql_query("SELECT * FROM tipo");
+
+    error_reporting(0);
+    ini_set(“display_errors”, 0);
+
   ?>
 
   <?php
@@ -80,7 +83,7 @@
           <select class="form-control" id="tipo" name="tipo">
             <option>Todos os tipos</option>
               <?php while($prod = mysql_fetch_array($query)) { ?>
-            <option value="<?php echo ($prod['tipo']) ?>"><?php echo ($prod['tipo']) ?></option>
+            <option value="<?php echo utf8_encode($prod['tipo']) ?>"><?php echo utf8_encode($prod['tipo']) ?></option>
               <?php } ?>
           </select>
         </div>
@@ -100,12 +103,12 @@
 
         // Verificamos se a ação é de busca
         if ($a == "buscar") {
-          $titulo = (trim($_POST['titulo']));
-          $autor = (trim($_POST['autor']));
-          $palavras_chave = (trim($_POST['palavras_chave']));
+          $titulo = utf8_decode(trim($_POST['titulo']));
+          $autor = utf8_decode(trim($_POST['autor']));
+          $palavras_chave = utf8_decode(trim($_POST['palavras_chave']));
           $ano = trim($_POST['ano']);
-          $tipo = (trim($_POST['tipo']));
-      
+          $tipo = utf8_decode(trim($_POST['tipo']));
+        
           if ($tipo == "Todos os tipos" || $ano == "Ano de Publicação") {
 
             if ($tipo == "Todos os tipos") {
@@ -132,8 +135,8 @@
               echo "<div class='col-sm-6 col-md-12'>";
               echo "<div class='thumbnail'>";
               echo "<div class='caption'>";
-              echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . ($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . ($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
-              echo "<p><a href='Arquivos/" . $arquivos->arquivo . "' target='_blank'' class='btn btn-primary' role='button'>Abrir</a> <a href='Arquivos/" . $arquivos->arquivo . "' download=" . ($arquivos->titulo) . " class='btn btn-default' role='button'>Download</a></p>";
+              echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . utf8_encode($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . utf8_encode($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
+              echo "<p><a href='Arquivos/" . $arquivos->arquivo . "' target='_blank'' class='btn btn-primary' role='button'>Abrir</a> <a href='Arquivos/" . $arquivos->arquivo . "' download=" . utf8_encode($arquivos->titulo) . " class='btn btn-default' role='button'>Download</a></p>";
               echo "</div>";
               echo "</div>";
               echo "</div>";

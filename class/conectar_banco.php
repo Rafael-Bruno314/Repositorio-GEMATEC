@@ -1,5 +1,5 @@
 <?php
-	$banco = "id3193443_gematec";
+	$banco = "repositorio_gematec";
 	$usuario = "root";
 	$senha = "";
 	$host = "localhost";

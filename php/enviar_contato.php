@@ -7,6 +7,9 @@
 	header("Pragma: no-cache");
 	header("Content-Type: text/html; charset=utf-8",true);
 
+  error_reporting(0);
+  ini_set(“display_errors”, 0);
+
 	// Recupera os dados dos campos
   $email = $_POST['email'];
   $nome = $_POST['nome'];

@@ -1,4 +1,9 @@
 <?php
+  error_reporting(0);
+  ini_set(“display_errors”, 0);
+?>
+
+<?php
   if(!isset($_SESSION))
     session_start();
     //Login de Usários
@@ -20,7 +25,7 @@
 
         if(count($erro) == 0){
           $sql = "SELECT senha as senha, id_user as valor 
-            FROM usuario 
+            FROM administradores 
             WHERE email = '$_SESSION[email]'";
           $que = $mysqli->query($sql) or die($mysqli->error);
           $dado = $que->fetch_assoc();

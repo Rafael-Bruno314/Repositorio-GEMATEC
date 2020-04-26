@@ -61,62 +61,61 @@
         <button type="submit" class="btn btn-primary" data-loading-text="Loading..." value="Buscar">Buscar</button> 
       </form>
       <hr>
-    </div>
-    
-    <?php
-      error_reporting(0);
-      ini_set(“display_errors”, 0);
-    ?>
-
-    <?php
-      // Recuperamos a ação enviada pelo formulário
-      $a = $_GET['a'];
       
-      // Verificamos se a ação é de busca
-      if ($a == "buscar") {
-        $titulo = (trim($_POST['titulo']));
-        $autor = (trim($_POST['autor']));
-        $palavras_chave = (trim($_POST['palavras_chave']));
-        $ano = trim($_POST['ano']);
-          
-        if ($ano == "ano") {
-          $sql = mysql_query("SELECT * FROM apresentacoes WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" .$autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
-        }
-        else {
-          $sql = mysql_query("SELECT * FROM apresentacoes WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
-        }
-              
-        // Descobrimos o total de registros encontrados
-        $numRegistros = mysql_num_rows($sql);
-              
-        // Se houver pelo menos um registro, exibe-o
-        if ($numRegistros != 0) {
-          while ($apresentacao = mysql_fetch_object($sql)) {
-            echo "<div class='col-sm-6 col-md-12'>";
-            echo "<div class='thumbnail'>";
-            echo "<div class='caption'>";
-            echo "<strong><p class='destaque'>" . ($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Autor: </b><span>" . ($apresentacao->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($apresentacao->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
-            echo "<br>";
-            echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" . ($apresentacao->titulo) . " class='btn btn-primary' id='down_button' data-loading-text='Loading...' role='button'>Download</a></p>";
-            echo "</div>";
-            echo "</div>";
-            echo "</div>";
-          }      
-          // Se não houver registros
-        } else {
-          echo "<h1>Nenhuma apresentação foi encontrada</h1>";
-        }
-      }
-    ?>
+      <?php
+        error_reporting(0);
+        ini_set(“display_errors”, 0);
+      ?>
 
-    <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
-    <script src="js/bootstrap.min.js"></script>
-	  <!-- Para colocar a navbar restrita -->
-    <div w3-include-html="css/rodape.html"></div> 
-    <!-- Para colocar a navbar restrita -->
-    <script>w3.includeHTML();</script>
+      <?php
+        // Recuperamos a ação enviada pelo formulário
+        $a = $_GET['a'];
+        
+        // Verificamos se a ação é de busca
+        if ($a == "buscar") {
+          $titulo = utf8_decode(trim($_POST['titulo']));
+          $autor = utf8_decode(trim($_POST['autor']));
+          $palavras_chave = utf8_decode(trim($_POST['palavras_chave']));
+          $ano = trim($_POST['ano']);
+            
+          if ($ano == "ano") {
+            $sql = mysql_query("SELECT * FROM apresentacoes WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" .$autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
+          }
+          else {
+            $sql = mysql_query("SELECT * FROM apresentacoes WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo");
+          }
+                
+          // Descobrimos o total de registros encontrados
+          $numRegistros = mysql_num_rows($sql);
+                
+          // Se houver pelo menos um registro, exibe-o
+          if ($numRegistros != 0) {
+            while ($apresentacao = mysql_fetch_object($sql)) {
+              echo "<div class='col-sm-6 col-md-12'>";
+              echo "<div class='thumbnail'>";
+              echo "<div class='caption'>";
+              echo "<strong><p class='destaque'>" . utf8_encode($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($apresentacao->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($apresentacao->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
+              echo "<br>";
+              echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" . utf8_encode($apresentacao->titulo) . " class='btn btn-primary' id='down_button' data-loading-text='Loading...' role='button'>Download</a></p>";
+              echo "</div>";
+              echo "</div>";
+              echo "</div>";
+            }      
+            // Se não houver registros
+          } else {
+            echo "<h1>Nenhuma apresentação foi encontrada</h1>";
+          }
+        }
+      ?>
 
+      <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
+      <script src="js/bootstrap.min.js"></script>
+      <!-- Para colocar a navbar restrita -->
+      <div w3-include-html="css/rodape.html"></div> 
+      <!-- Para colocar a navbar restrita -->
+      <script>w3.includeHTML();</script>
+    </div>
   </body>
 </html>

@@ -31,6 +31,8 @@
 			include('class/conectar_banco.php');
 			$query_genero = mysql_query("SELECT * FROM genero");
 			$query_tipo = mysql_query("SELECT * FROM tipo");
+			error_reporting(0);
+  		ini_set(“display_errors”, 0);
 		?>
 
 		<div class="container">
@@ -43,7 +45,7 @@
 					<select id="tipo" name="tipo" class="form-control" onChange="Excluir_tipo(this.value,this.id)">
 						<option value="">Tipos</option>
 						<?php while($tip = mysql_fetch_array($query_tipo)) { ?> 
-							<option value="<?php echo ($tip['id']) ?>"><?php echo ($tip['tipo'])?></option>
+							<option value="<?php echo ($tip['id']) ?>"><?php echo utf8_encode($tip['tipo'])?></option>
 						<?php } ?>
 					</select>
 				</div>
@@ -53,7 +55,7 @@
 					<select id="genero" name="genero" class="form-control" onChange="Excluir_genero(this.value,this.id)">
 						<option value="">Gêneros</option>
 						<?php while($gener = mysql_fetch_array($query_genero)) { ?>
-							<option value="<?php echo ($gener['id']) ?>"><?php echo ($gener['genero'])?></option>
+							<option value="<?php echo ($gener['id']) ?>"><?php echo utf8_encode($gener['genero'])?></option>
 						<?php } ?>
 					</select>
 				</div>

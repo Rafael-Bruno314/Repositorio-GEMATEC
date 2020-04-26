@@ -4,14 +4,14 @@
 ?>
 
 <?php
-  #error_reporting(0);
-  #ini_set(“display_errors”, 0);
+  error_reporting(0);
+  ini_set(“display_errors”, 0);
 ?>
 
 <?php
-  $query  = mysql_query("SELECT * FROM usuarios");
-  $query2 = mysql_query("SELECT * FROM usuarios");
-  $query_mudar = mysql_query("SELECT * FROM usuarios ORDER BY titulo");
+  $query  = mysql_query("SELECT * FROM banners");
+  $query2 = mysql_query("SELECT * FROM banners");
+  $query_mudar = mysql_query("SELECT * FROM banners ORDER BY titulo");
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +63,7 @@
 			        <select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
 				        <option value="">Escolha o título da obra que deseja alterar</option>
 				          <?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-				        <option value="<?php echo  ($titulo_muda['id']) ?>"><?php echo  ($titulo_muda['id']); echo " - ";echo  ($titulo_muda['titulo'])?></option>
+				        <option value="<?php echo  utf8_encode($titulo_muda['id']) ?>"><?php echo  utf8_encode($titulo_muda['titulo'])?></option>
 				          <?php } ?>
 			        </select>
 			      </div>
@@ -147,20 +147,19 @@
 			  </div>
 		  </form>
 		  <hr>
-		</div>
 
     <?php
       if (isset($_POST['alt_dps_da_ganbiarra'])) {
-        $codigo = $_POST['titulo_mudar'];
-        $autor = $_POST['autor'];
-        $titulo = $_POST['titulo'];
-        $palavras_chave = $_POST['palavras_chave'];
+        $codigo = utf8_decode($_POST['titulo_mudar']);
+        $autor = utf8_decode($_POST['autor']);
+        $titulo = utf8_decode($_POST['titulo']);
+        $palavras_chave = utf8_decode($_POST['palavras_chave']);
         $ano = $_POST['ano'];
         $banner = $_FILES["banner"];
       
         if ($codigo == "") {
           echo "<script>alert('Por favor digite um código válido para alterar');</script>";
-        } 
+        }
         else {
           if (!empty($_FILES['banner']['name'])) {
               // Pega extensão da imagem
@@ -169,14 +168,14 @@
               if ($ext[1] != "jpg" && $ext[1] != "png") {
                 echo "<script>alert('Aviso: A imagem não foi adicionada ou possui um formato inválido!\\n Por favor utilize os formatos jpg ou png')</script>";
           
-                $query = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+                $query = mysql_query("SELECT * FROM banners WHERE id= $codigo");
                 $usuario = mysql_fetch_array($query);
                 $nome_imagem   = $usuario['banner'];
                 $nome_imagem_t = $usuario['thumb'];
               } 
               else {
                 //Para apagar imagem antiga ao alterar!
-                $excluindo = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+                $excluindo = mysql_query("SELECT * FROM banners WHERE id= $codigo");
                 while ($row = mysql_fetch_object($excluindo)) {
                 $endereco = $row->banner;
               }
@@ -198,7 +197,7 @@
                       
               if ($ext[1] == "jpg") {
                 //Para apagar imagem antiga ao alterar!
-                $excluindo = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+                $excluindo = mysql_query("SELECT * FROM banners WHERE id= $codigo");
                 while ($row = mysql_fetch_object($excluindo)) {
                 $endereco = $row->thumb;
               }
@@ -248,7 +247,7 @@
             if ($ext[1] == "png") {
               //thumb
               //Para apagar imagem antiga ao alterar!
-              $excluindo = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+              $excluindo = mysql_query("SELECT * FROM banners WHERE id= $codigo");
               while ($row = mysql_fetch_object($excluindo)) {
                 $endereco = $row->thumb;
               }
@@ -297,7 +296,7 @@
           }
         } 
         else {
-          $query = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+          $query = mysql_query("SELECT * FROM banners WHERE id= $codigo");
           $usuario = mysql_fetch_array($query);
           $nome_imagem   = $usuario['banner'];
           $nome_imagem_t = $usuario['thumb'];
@@ -308,30 +307,30 @@
           }
           else {
             if ($autor == "") {
-              $query = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+              $query = mysql_query("SELECT * FROM banners WHERE id= $codigo");
               $usuario = mysql_fetch_array($query);
               $autor = $usuario['autor'];
             }
           
             if ($titulo == "") {
-              $query = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+              $query = mysql_query("SELECT * FROM banners WHERE id= $codigo");
               $usuario = mysql_fetch_array($query);
               $titulo = $usuario['titulo'];
             }
           
             if ($palavras_chave == "") {
-              $query = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+              $query = mysql_query("SELECT * FROM banners WHERE id= $codigo");
               $usuario = mysql_fetch_array($query);
               $palavras_chave = $usuario['palavras_chave'];
             }
         
             if ($ano == 0) {
-              $query = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+              $query = mysql_query("SELECT * FROM banners WHERE id= $codigo");
               $usuario = mysql_fetch_array($query);
               $ano = $usuario['ano'];
             }
       
-            $alterar = "UPDATE `usuarios` SET `autor`= '$autor',`titulo`= '$titulo',`palavras_chave`='$palavras_chave',`ano`='$ano',`banner`='$nome_imagem',`thumb`='$nome_imagem_t' WHERE id = '$codigo'"; //Vai alterar o banner e a thumb!
+            $alterar = "UPDATE `banners` SET `autor`= '$autor',`titulo`= '$titulo',`palavras_chave`='$palavras_chave',`ano`='$ano',`banner`='$nome_imagem',`thumb`='$nome_imagem_t' WHERE id = '$codigo'"; //Vai alterar o banner e a thumb!
       
             if (!$alterar) {
               echo "<script>alert('Não deu...')</script>";
@@ -342,7 +341,7 @@
       
             mysql_query($alterar, $conn) or die("<font style=Arial color=red><h1>Houve um erro na alteração dos dados</h1></font>");
       
-            $busca = mysql_query("SELECT * FROM usuarios WHERE id= $codigo");
+            $busca = mysql_query("SELECT * FROM banners WHERE id= $codigo");
       
             while ($usuario = mysql_fetch_object($busca)) {
               echo "<div class='row'>";
@@ -352,7 +351,7 @@
               echo "<a href='Banners/" . $usuario->banner . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a>";
               echo "</td><td width='10%' color: 'green'>";
               echo "</td><td>";
-              echo "<p><b class='titulo'>Código: </b><span>" . $usuario->id . "</span></br></p><p><b class='titulo'>Título: </b><span>" .  ($usuario->titulo) . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" .  ($usuario->autor) . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" .  ($usuario->palavras_chave) . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br><br></p>";
+              echo "<p><b class='titulo'>Código: </b><span>" . $usuario->id . "</span></br></p><p><b class='titulo'>Título: </b><span>" .  utf8_encode($usuario->titulo) . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" .  utf8_encode($usuario->autor) . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" .  utf8_encode($usuario->palavras_chave) . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br><br></p>";
               echo "</td></tr>";
               echo "</table>";
               echo "</div>";
