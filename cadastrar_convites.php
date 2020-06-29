@@ -103,24 +103,24 @@
 		<noscript>Desculpe, mas seu navegador não suporta <b>JavaScript</b>, ou ele pode estar desabilitado! Sua experiência com esse sistema ficará seriamente afetada!</noscript>
   </head>
 
-  <style>	
-  	b.destaque_ano {
-		font-size: 25px;
-		color: yellow;
-	}
-	
-	b.destaque_mes {
-		font-size: 25px;
-		color: orange;
-		padding-left:3%;
-	}
-	
-	b.destaque_dia {
-		font-size: 25px;
-		color: violet;
-		padding-left:6%;
-	}
-  </style>
+  <style>		
+		b.destaque_ano {
+			font-size: 25px;
+			color: #652E79;
+		}
+
+		b.destaque_mes {
+			font-size: 25px;
+			color: #E6447D;
+			padding-left:3%;
+		}
+		
+		b.destaque_dia {
+			font-size: 25px;
+			color: #586DF4;
+			padding-left:6%;
+		}
+	</style>
 
   <body>
 		<!-- Para colocar a navbar restrita -->
@@ -197,7 +197,10 @@
 					<?php while($ano_array = mysql_fetch_array($ano)){ ?>
 
 						<summary><?php echo "<b class='destaque_ano'>". $ano_array['ano']."</b>";?></summary>
-						<?php $mes_select = mysql_query("SELECT DISTINCT mes FROM convites WHERE `ano` =".$ano_array[0]); //Não importa, deu certo!!! ?> 
+						<?php 
+							$ordena_mes = "SELECT DISTINCT mes FROM convites WHERE `ano` =".$ano_array[0]." ORDER BY mes ASC";
+							$mes_select = mysql_query($ordena_mes); 
+						?> 
 
 						<?php while($mes_array = mysql_fetch_array($mes_select)){ ?>
 							<?php if($mes_array['mes'] == 1){$mes = "Janeiro";}if($mes_array['mes'] == 2){$mes = "Fevereiro";}if($mes_array['mes'] == 3){($mes = "Março");}if($mes_array['mes'] == 4){$mes = "Abril";}if($mes_array['mes'] == 5){$mes = "Maio";}if($mes_array['mes'] == 6){$mes = "Junho";}if($mes_array['mes'] == 7){$mes = "Julho";}if($mes_array['mes'] == 8){$mes = "Agosto";}if($mes_array['mes'] == 9){$mes = "Setembro";}if($mes_array['mes'] == 10){$mes = "Outubro";}if($mes_array['mes'] == 11){$mes = "Novembro";}if($mes_array['mes'] == 12){$mes = "Dezembro";}?>

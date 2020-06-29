@@ -15,7 +15,7 @@
 <?php
   $query  = mysql_query("SELECT * FROM apresentacoes");
   $query2 = mysql_query("SELECT * FROM apresentacoes");
-  $query_mudar = mysql_query("SELECT * FROM apresentacoes");
+  $query_mudar = mysql_query("SELECT * FROM apresentacoes ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
               <select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
                 <option value="">Escolha o título da obra que deseja alterar</option>
                   <?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-                <option value="<?php echo ($titulo_muda['id']) ?>"><?php echo ($titulo_muda['id']); echo " - ";echo ($titulo_muda['titulo'])?></option>
+                <option value="<?php echo ($titulo_muda['id']) ?>"><?php echo utf8_encode($titulo_muda['titulo'])?></option>
                   <?php } ?>
               </select>
             </div>
@@ -167,9 +167,9 @@
       <?php
         if (isset($_POST['alt_dps_da_ganbiarra'])) {
           $codigo = $_POST['titulo_mudar'];
-          $autor = ($_POST['autor']);
-          $titulo = ($_POST['titulo']);
-          $palavras_chave = ($_POST['palavras_chave']);
+          $autor = utf8_decode($_POST['autor']);
+          $titulo = utf8_decode($_POST['titulo']);
+          $palavras_chave = utf8_decode($_POST['palavras_chave']);
           $ano = $_POST['ano'];
           $apresentacao = $_FILES["apresentacao"];
           
@@ -252,9 +252,9 @@
                 echo "<div class='col-sm-6 col-md-12'>";
                 echo "<div class='thumbnail'>";
                 echo "<div class='caption'>";
-                echo "<strong><p class='destaque'>" . ($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Código:</b><span> " . $apresentacao->id . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($apresentacao->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($apresentacao->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
+                echo "<strong><p class='destaque'>" . utf8_encode($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Código:</b><span> " . $apresentacao->id . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($apresentacao->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($apresentacao->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
                 echo "<br>";
-                echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" . ($apresentacao->titulo) . " class='btn btn-primary' role='button'>Download</a></p>";
+                echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" . utf8_encode($apresentacao->titulo) . " class='btn btn-primary' role='button'>Download</a></p>";
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";

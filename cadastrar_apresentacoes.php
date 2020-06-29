@@ -11,9 +11,9 @@
 <?php
 	// Se o usuário clicou no botão cadastrar efetua as ações
 	if (isset($_POST['cad_dps_da_ganbiarra'])) {
-    $autor = ($_POST['autor']);
-    $titulo = ($_POST['titulo']);
-    $palavras_chave = ($_POST['palavras_chave']);
+    $autor = utf8_decode($_POST['autor']);
+    $titulo = utf8_decode($_POST['titulo']);
+    $palavras_chave = utf8_decode($_POST['palavras_chave']);
     $ano = $_POST['ano'];
     $apresentacao = $_FILES["apresentacao"];
 
@@ -213,9 +213,9 @@
 					echo "<div class='col-sm-6 col-md-12'>";
 					echo "<div class='thumbnail'>";
 					echo "<div class='caption'>";
-					echo "<strong><p class='destaque'>" . ($usuario->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Código:</b><span> " . $usuario->id . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($usuario->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($usuario->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br>";
+					echo "<strong><p class='destaque'>" . utf8_encode($usuario->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Código:</b><span> " . $usuario->id . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($usuario->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($usuario->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br>";
 					echo "<br>";
-					echo "<p><a href='Apresentacoes/" . $usuario->apresentacao . "' download=" . ($usuario->titulo) . " class='btn btn-primary' role='button'>Download</a></p>";
+					echo "<p><a href='Apresentacoes/" . $usuario->apresentacao . "' download=" . utf8_encode($usuario->titulo) . " class='btn btn-primary' role='button'>Download</a></p>";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";

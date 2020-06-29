@@ -16,12 +16,12 @@
 <?php
 	// Se o usuário clicou no botão cadastrar efetua as ações
 	if (isset($_POST['cad_dps_da_ganbiarra'])) {
-    $autor = ($_POST['autor']);
-    $titulo = ($_POST['titulo']);
-    $palavras_chave = ($_POST['palavras_chave']);
+    $autor = utf8_decode($_POST['autor']);
+    $titulo = utf8_decode($_POST['titulo']);
+    $palavras_chave = utf8_decode($_POST['palavras_chave']);
     $ano = $_POST['ano'];
     $arquivo = $_FILES["arquivo"];
-    $tipo = ($_POST['tipo']);
+    $tipo = utf8_decode($_POST['tipo']);
 
     if ($ano == "Ano de Publicação") {
       $ano = "0000";
@@ -180,7 +180,7 @@
 									<select class="form-control" id="tipo" name="tipo" onChange="Add_tipo()">
 										<option value="selecione">Selecione</option>
 											<?php while ($prod = mysql_fetch_array($query)) { ?>
-										<option value="<?php echo ($prod['tipo']); ?>"><?php echo ($prod['tipo']); ?></option>
+										<option value="<?php echo utf8_encode($prod['tipo']); ?>"><?php echo utf8_encode($prod['tipo']); ?></option>
 											<?php } ?>
 										<option value="outro">Outro</option>
 									</select>
@@ -252,7 +252,7 @@
 					echo "<div class='col-sm-6 col-md-6'>";
 					echo "<div class='thumbnail'>";
 					echo "<div class='caption'>";
-					echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . ($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . ($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . ($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
+					echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . utf8_encode($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . utf8_encode($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";

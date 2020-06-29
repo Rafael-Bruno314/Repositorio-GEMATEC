@@ -49,7 +49,7 @@ function loadDoc(cFunction) {
 
 function myFunction(xhttp) {
 	var resposta = xhttp.responseText; // obter a resposta como string
-	Tratar_resposta(resposta);
+  Tratar_resposta(resposta);
 }
 
 function Tratar_resposta(resposta){ //

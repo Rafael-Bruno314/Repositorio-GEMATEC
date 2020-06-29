@@ -13,7 +13,7 @@
 ?>
 
 <?php
-	$query_mudar = mysql_query("SELECT * FROM usuarios ORDER BY titulo");
+	$query_mudar = mysql_query("SELECT * FROM banners ORDER BY titulo");
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +61,7 @@
 						<select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
 							<option value="">Escolha o título da obra que deseja excluir</option>
 							<?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-								<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo ($titulo_muda['id']); echo " - ";echo ($titulo_muda['titulo'])?></option>
+								<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo utf8_encode($titulo_muda['titulo'])?></option>
 							<?php } ?>
 						</select>
 					</div>
@@ -142,7 +142,7 @@
 					if ($codigo == "") {
 							echo "<script>alert('Escolha um campo válido')</script>";
 					} else {
-        		$mostrar = mysql_query("SELECT * FROM `usuarios` WHERE id = '$codigo'");
+        		$mostrar = mysql_query("SELECT * FROM `banners` WHERE id = '$codigo'");
 
         		while ($row = mysql_fetch_object($mostrar)) {
 							$id = $row->id;
@@ -154,7 +154,7 @@
 							$thumb = $row->thumb;
         		}
         
-        		$excluir = "DELETE FROM `usuarios` WHERE id = '$codigo'"; //Linha problema!!!
+        		$excluir = "DELETE FROM `banners` WHERE id = '$codigo'"; //Linha problema!!!
         
 						if($banner != "sem_imagem.jpg") {
 							$diretorio = "Banners/";

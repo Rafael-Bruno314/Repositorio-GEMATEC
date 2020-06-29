@@ -43,45 +43,39 @@
 	      <div class="panel-body">
 	
           <table width = "100%" border = "0" frame="none">
-            <div class="form-group">
-              <tr>
-                <td align=left>
-                  <label><h4>Nome Completo:</h4></label>
+            <tr>
+              <td align=left>
+                <label><h4>Nome Completo:</h4></label>
+              </td>
+              <div class="col-sm-10">
+                <td>
+                  <input type="text" class="form-control" value="" id="nome" onblur="alerta(this.value)" name="nome" placeholder="Nome completo">
                 </td>
+              </div>
+            </tr>
+          
+            <tr>
+              <td align=left>
+                <label><h4>E-mail:</h4></label>
+              </td>
+              <div class="col-sm-10">
+                <td>
+                  <input type="email" class="form-control" value="" id="email" name="email" onblur="alerta(this.value)" placeholder="E-mail">
+                </td>
+              </div>
+            </tr>
+          
+            <tr>
+              <td align=left>
+                <label><h4>Mensagem:</h4></label>
+              </td>
                 <div class="col-sm-10">
                   <td>
-                    <input type="text" class="form-control" value="" id="nome" onblur="alerta(this.value)" name="nome" placeholder="Nome completo">
+                    <br>
+                    <textarea rows="6" cols="50" value="" name="mensagem" id="mensagem" onblur="alerta(this.value)" class="form-control"></textarea>
                   </td>
                 </div>
-              </tr>
-            </div>
-          
-            <div class="form-group">
-              <tr>
-                <td align=left>
-                  <label><h4>E-mail:</h4></label>
-                </td>
-                <div class="col-sm-10">
-                  <td>
-                    <input type="email" class="form-control" value="" id="email" name="email" onblur="alerta(this.value)" placeholder="E-mail">
-                  </td>
-                </div>
-              </tr>
-            </div>
-          
-            <div class="form-group">
-              <tr>
-                <td align=left>
-                  <label><h4>Mensagem:</h4></label>
-                </td>
-                  <div class="col-sm-10">
-                    <td>
-                      <br>
-                      <textarea rows="6" cols="50" value="" name="mensagem" id="mensagem" onblur="alerta(this.value)" class="form-control"></textarea>
-                    </td>
-                  </div>
-              </tr>
-            </div>
+            </tr>
 		  
 		        <tr>
               <div id="mostrar" class="alert alert-warning alert-dismissible" style="display: none">
@@ -93,14 +87,12 @@
           <hr>
 
           <table width = "95%" border="0">
-            <div class="form-group">
-			        <tr>
-                <td align=center >
-                  <button type="submit" id="enviar" name="enviar" class="btn btn-primary btn-lg" onClick="Confirma()">Enviar</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			            <input type="reset"  class="btn btn-warning btn-lg" name="apagar" id="apagar" value="Apagar Campos">
-                </td>
-              </tr>
-            </div>
+            <tr>
+              <td align=center >
+                <button type="submit" id="enviar" name="enviar" class="btn btn-primary btn-lg" onClick="Confirma()">Enviar</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <input type="reset"  class="btn btn-warning btn-lg" name="apagar" id="apagar" value="Apagar Campos">
+              </td>
+            </tr>
           </table>
 	      </div>
 	      </div>

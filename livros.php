@@ -63,7 +63,7 @@
           <select class="form-control" id="genero" name="genero">
             <option value = "genero">Gênero</option>
             <?php while($prod = mysql_fetch_array($query)) { ?>
-              <option value="<?php echo ($prod['genero']) ?>"><?php echo ($prod['genero']) ?></option>
+              <option value="<?php echo utf8_encode($prod['genero']) ?>"><?php echo utf8_encode($prod['genero']) ?></option>
             <?php } ?>
           </select>
         </div>
@@ -84,11 +84,11 @@
         $a = $_GET['a'];
 
         if ($a == "buscar") {
-          $titulo = (trim($_POST['titulo']));
-          $autor = (trim($_POST['autor']));
-          $editora = (trim($_POST['editora']));
+          $titulo = utf8_decode(trim($_POST['titulo']));
+          $autor = utf8_decode(trim($_POST['autor']));
+          $editora = utf8_decode(trim($_POST['editora']));
           $ano = trim($_POST['ano']);
-          $genero  = (trim($_POST['genero']));
+          $genero  = utf8_decode(trim($_POST['genero']));
           
           if ($genero == "genero" || $ano == "ano") {
             
@@ -119,7 +119,7 @@
               echo "<div class='thumbnail'>";
               echo "<a href='Capas/" . $livros->capa . " 'target='_blank'' ><img src='Capas/" . $livros->capa . "' alt='Foto de exibição' /></a>";
               echo "<div class='caption'>";
-              echo "<strong><p class='destaque'>" . ($livros->titulo) . "</p></strong>" . "<b class='titulo'>Gênero: </b><span>" . ($livros->genero) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . ($livros->autor) . "</span></br>" . "<b class='titulo'>Editora: </b><span>" . ($livros->editora) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $livros->ano . "</span><br><br>";
+              echo "<strong><p class='destaque'>" . utf8_encode($livros->titulo) . "</p></strong>" . "<b class='titulo'>Gênero: </b><span>" . utf8_encode($livros->genero) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($livros->autor) . "</span></br>" . "<b class='titulo'>Editora: </b><span>" . utf8_encode($livros->editora) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $livros->ano . "</span><br><br>";
               echo "</div>";
               echo "</div>";
               echo "</div>";

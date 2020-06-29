@@ -37,7 +37,8 @@
         include('ano_config.php');
       ?>
 
-	    <form class="form-inline" name="frmBuscarBanners" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>?a=buscar" >
+	    <form class="form-inline" name="frmBuscarBanners" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>?a=buscar">
+      
         <div class="form-group">
           <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
         </div>
@@ -88,17 +89,16 @@
 
   // Verificamos se a ação é de busca
   if ($a == "buscar") {
-    
-    $titulo = (trim($_POST['titulo']));
-    $ano = trim($_POST['ano']);
-    $autor = (trim($_POST['autor']));
-    $palavras_chave = (trim($_POST['palavras_chave']));
+    $titulo = utf8_decode(trim($_POST['titulo']));
+    $ano = utf8_decode(trim($_POST['ano']));
+    $autor = utf8_decode(trim($_POST['autor']));
+    $palavras_chave = utf8_decode(trim($_POST['palavras_chave']));
 
     if ($ano == "ano") {
-      $sql = mysql_query("SELECT * FROM usuarios WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!
+      $sql = mysql_query("SELECT * FROM banners WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!
     }
     else {
-      $sql = mysql_query("SELECT * FROM usuarios WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!!
+      $sql = mysql_query("SELECT * FROM banners WHERE titulo LIKE '%" . $titulo . "%' AND ano LIKE '%" . $ano . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!!
     }
       
     // Descobrimos o total de registros encontrados
@@ -120,11 +120,11 @@
         echo "<div class='thumbnail'>";
         echo "<table>";
         echo "<tr><td>";
-        echo "<a href='Banners/" . $usuario->banner . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a>";
+        echo "<a href='Banners/" . utf8_encode($usuario->banner) . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a>";
         echo "</td><td width='10%' color: 'green'>";
         echo "</td><td>";
-        echo "<p><b class='titulo'>Título: </b><span>" . $usuario->titulo . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" . $usuario->autor . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" . $usuario->palavras_chave . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $marca . "</span><br><br></p>";
-        echo "<a href='Banners/" . $usuario->banner . "' target='_blank'' class='btn btn-primary' role='button'><div class='space'>Abrir</div></a>    <a href='Banners/" . $usuario->banner . "' download=" . $usuario->titulo . " class='btn btn-default' role='button'>Download</a>";
+        echo "<p><b class='titulo'>Título: </b><span>" . utf8_encode($usuario->titulo) . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($usuario->autor) . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($usuario->palavras_chave) . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $marca . "</span><br><br></p>";
+        echo "<a href='Banners/" . $usuario->banner . "' target='_blank'' class='btn btn-primary' role='button'><div class='space'>Abrir</div></a>    <a href='Banners/" . $usuario->banner . "' download=" . utf8_encode($usuario->titulo) . " class='btn btn-default' role='button'>Download</a>";
         echo "</td></tr>";
         echo "</table>";
         echo "</div>";

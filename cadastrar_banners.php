@@ -8,16 +8,16 @@
 ?>
 
 <?php
-	/*error_reporting(0);
-	ini_set(“display_errors”, 0);*/
+	error_reporting(0);
+	ini_set(“display_errors”, 0);
 ?>
 
 <?php
 	// Se o usuário clicou no botão cadastrar efetua as ações
 	if (isset($_POST['cad_dps_da_ganbiarra'])) {
-    $autor = ($_POST['autor']);
-    $titulo = ($_POST['titulo']);
-    $palavras_chave = ($_POST['palavras_chave']);
+    $autor = (utf8_decode($_POST['autor']));
+    $titulo = (utf8_decode($_POST['titulo']));
+    $palavras_chave = (utf8_decode($_POST['palavras_chave']));
     $ano = $_POST['ano'];
     $banner = $_FILES["banner"];
     
@@ -157,7 +157,7 @@
 			$nome_imagem_t = "sem_imagem.jpg";
 		}
 		
-    $sql = "INSERT INTO usuarios(autor,titulo,palavras_chave,ano,banner,thumb) VALUES ('$autor','$titulo','$palavras_chave','$ano','$nome_imagem','$nome_imagem_t')"; //Linha problema!!!
+    $sql = "INSERT INTO banners(autor,titulo,palavras_chave,ano,banner,thumb) VALUES ('$autor','$titulo','$palavras_chave','$ano','$nome_imagem','$nome_imagem_t')"; //Linha problema!!!
 		mysql_query($sql, $conn) or die("<font style=Arial color=red><h1>Houve um erro na gravação dos dados</h1></font>");
 		
 		if (!$sql) {
@@ -298,7 +298,7 @@
 
 			<?php
 				// Seleciona todos os usuários
-				$sql = mysql_query("SELECT * FROM usuarios ORDER BY id desc");
+				$sql = mysql_query("SELECT * FROM banners ORDER BY id desc");
 				$numRegistros = mysql_num_rows($sql);
 
 				if ($numRegistros == 0) {
@@ -308,7 +308,7 @@
 				while ($usuario = mysql_fetch_object($sql)) {
 					print '<table border="0">';
 					echo "<tr><td><a href='Banners/" . $usuario->banner . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a></td><td>&nbsp&nbsp&nbsp&nbsp</td>";
-					echo "&nbsp&nbsp<td align='left'><b>Título:</b> " . $usuario->titulo . "</br>" . " <b>Autor:</b> " . $usuario->autor . "</br>" . " <b>Palavras-chave:</b> " . $usuario->palavras_chave . "</br>" . " <b>Ano de publicação:</b> " . $usuario->ano . "</td></tr><br />";
+					echo "&nbsp&nbsp<td align='left'><b>Título:</b> " . utf8_encode($usuario->titulo) . "</br>" . " <b>Autor:</b> " . utf8_encode($usuario->autor) . "</br>" . " <b>Palavras-chave:</b> " . utf8_encode($usuario->palavras_chave) . "</br>" . " <b>Ano de publicação:</b> " . $usuario->ano . "</td></tr><br />";
 					print '</table>';
 				}
 				echo "<hr>";

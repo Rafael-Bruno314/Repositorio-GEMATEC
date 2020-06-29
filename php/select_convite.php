@@ -7,6 +7,9 @@
 	header("Pragma: no-cache");
 	header("Content-Type: text/html; charset=utf-8",true);
 
+  error_reporting(0);
+  ini_set(“display_errors”, 0);
+
 	$mudar = $_GET["manda"];
 	$sql = mysql_query("SELECT * FROM convites WHERE id = ".$mudar);
 	$numRegistros = mysql_num_rows($sql);

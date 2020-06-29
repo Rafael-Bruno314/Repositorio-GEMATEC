@@ -17,10 +17,10 @@
   // Se o usuário clicou no botão cadastrar efetua as ações
   if (isset($_POST['cad_dps_da_ganbiarra'])) {
     // Recupera os dados dos campos
-    $autor = ($_POST['autor']);
-    $titulo = ($_POST['titulo']);
-    $editora = ($_POST['editora']);
-    $genero = ($_POST['genero']);
+    $autor = utf8_decode($_POST['autor']);
+    $titulo = utf8_decode($_POST['titulo']);
+    $editora = utf8_decode($_POST['editora']);
+    $genero = utf8_decode($_POST['genero']);
     $ano = $_POST['ano'];
     $capa = $_FILES["capa"];
 	
@@ -356,7 +356,7 @@
           print '<table border="0">';
           #echo "<tr><td><a href='Capas/" . $usuario->capa . " 'target='_blank'' ><img src='Capas/" . $usuario->capa . "' alt='Foto de exibição' /></a></td><td>&nbsp&nbsp&nbsp&nbsp</td>";
           echo "<tr><td><img src='Capas/" . $usuario->capa . "' alt='Foto de exibição' /></td><td>&nbsp&nbsp&nbsp&nbsp</td>";
-          echo "&nbsp&nbsp<td align='left'><b>Título:</b> " . ($usuario->titulo) . "</br>" . " <b>Autor:</b> " . ($usuario->autor) . "</br>" . " <b>Gênero:</b> " . ($usuario->genero) . "</br>" . " <b>Editora:</b> " . ($usuario->editora) . "</br>" . " <b>Ano de publicação:</b> " . $usuario->ano . "</td></tr><br />";
+          echo "&nbsp&nbsp<td align='left'><b>Título:</b> " . utf8_encode($usuario->titulo) . "</br>" . " <b>Autor:</b> " . utf8_encode($usuario->autor) . "</br>" . " <b>Gênero:</b> " . utf8_encode($usuario->genero) . "</br>" . " <b>Editora:</b> " . utf8_encode($usuario->editora) . "</br>" . " <b>Ano de publicação:</b> " . $usuario->ano . "</td></tr><br />";
           echo "<hr>";  
           print '</table>';
         }
