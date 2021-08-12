@@ -1,5 +1,6 @@
 <?php 
-  #include("class/protect.php"); 
+  #include("class/protect.php");
+	header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -67,7 +68,7 @@
             <select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
               <option value="">Escolha o título da obra que deseja alterar</option>
                 <?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-              <option value="<?php echo ($titulo_muda['id']) ?>"><?php echo utf8_encode($titulo_muda['titulo'])?></option>
+              <option value="<?php echo ($titulo_muda['id']) ?>"><?php echo  ($titulo_muda['titulo'])?></option>
                 <?php } ?>
             </select>
           </div>
@@ -99,14 +100,14 @@
 
             <tr>
               <td align=left>
-                <label><h4>Gênero</h4></label>
+                <label><h4>Palavras-chave</h4></label>
               </td>
               <div class="col-sm-10">
                 <td>
                   <select class="form-control" id="genero" name="genero"  onChange="Add_genero()">
                     <option value="selecione">Selecione</option>
                       <?php while ($prod = mysql_fetch_array($comb)) { ?>
-                    <option value="<?php echo utf8_encode($prod['genero']); ?>"><?php echo utf8_encode($prod['genero']); ?></option>
+                    <option value="<?php echo  ($prod['genero']); ?>"><?php echo  ($prod['genero']); ?></option>
                       <?php } ?>
                     <option value="outro">Outro</option>
                   </select>
@@ -173,10 +174,10 @@
       <?php
         if (isset($_POST['alt_dps_da_ganbiarra'])) {
           $codigo = $_POST['titulo_mudar'];
-          $autor = utf8_decode($_POST['autor']);
-          $titulo = utf8_decode($_POST['titulo']);
-          $genero = utf8_decode($_POST['genero']);
-          $editora = utf8_decode($_POST['editora']);
+          $autor =  ($_POST['autor']);
+          $titulo =  ($_POST['titulo']);
+          $genero =  ($_POST['genero']);
+          $editora =  ($_POST['editora']);
           $ano = $_POST['ano'];
           $capa = $_FILES["capa"];
           
@@ -310,7 +311,7 @@
               $alterar = "UPDATE `livros` SET `autor`= '$autor',`titulo`= '$titulo',`editora`='$editora', `genero`='$genero',`ano`='$ano',`capa`='$nome_imagem_t' WHERE id = '$codigo'"; //`livro`='$nome_livro',
                   
               if (!$alterar) {
-                echo "<script>alert('Não deu...')</script>";
+                echo "<script>alert('Não foi possível alterar o livro')</script>";
               } 
               else {
                 echo "<script>alert('Alterado com sucesso')</script>";
@@ -328,7 +329,7 @@
                 echo "<a href='Capas/" . $livros->capa . " 'target='_blank'' ><img src='Capas/" . $livros->capa . "' alt='Foto de exibição' /></a>";
                 echo "</td><td width='10%' color: 'green'>";
                 echo "</td><td>";
-                echo "<strong><p class='destaque'>" . utf8_encode($livros->titulo) . "</p></strong>" . "<b class='titulo'>Código:</b><span> " . $livros->id . "</span></br>" . "<b class='titulo'>Gênero: </b><span>" . utf8_encode($livros->genero) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($livros->autor) . "</span></br>" . "<b class='titulo'>Editora: </b><span>" . utf8_encode($livros->editora) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $livros->ano . "</span><br><br>";
+                echo "<strong><p class='destaque'>" .  ($livros->titulo) . "</p></strong>" . "<b class='titulo'>Código:</b><span> " . $livros->id . "</span></br>" . "<b class='titulo'>Gênero: </b><span>" .  ($livros->genero) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" .  ($livros->autor) . "</span></br>" . "<b class='titulo'>Editora: </b><span>" .  ($livros->editora) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $livros->ano . "</span><br><br>";
                 #echo "<p><a href='Capas/".$livros->capa."' target='_blank'' class='btn btn-primary' role='button'>Abrir</a></p>"; //<a href='Livros/".$livros->livro."' download=".$livros->titulo." class='btn btn-default' role='button'>Download</a>
                 echo "</td></tr>";
                 echo "</table>";

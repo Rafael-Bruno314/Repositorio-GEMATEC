@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 25-Abr-2020 às 21:58
--- Versão do servidor: 5.7.24
+-- Tempo de geração: 11-Ago-2021 às 15:36
+-- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `repositorio_gematec`
+-- Banco de dados: `repositorio_gematec`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `administradores` (
 --
 
 INSERT INTO `administradores` (`id_user`, `email`, `senha`) VALUES
-(1, 'gematec@email.com', 'gematec');
+(1, 'ferry.gematec@gmail.com', 'Gematec2006');
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `apresentacoes` (
   `palavras_chave` varchar(100) NOT NULL,
   `apresentacao` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `apresentacoes`
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `arquivos` (
   `ano` year(4) NOT NULL,
   `arquivo` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `banners` (
   `banner` varchar(100) NOT NULL,
   `thumb` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=310 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=321 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `banners`
@@ -140,7 +140,7 @@ INSERT INTO `banners` (`id`, `autor`, `titulo`, `palavras_chave`, `ano`, `banner
 (217, 'FERRY, Alexandre da Silva; NAGEM, Ronaldo Luiz', 'Analogias e contra-analogias no processo de ensino e aprendizagem de modelos atômicos', '______', 0, '1e65ba284682e9b3e706e14c45029c89.jpg', 'aca12420e3d2ab34745d4ba3c4589d12.jpg'),
 (218, 'OLIVEIRA,Alexsandro J.F.;NAGEM,Ronaldo Luiz', 'Uso de modelo de ensino em ciências com recurso a analogias – o planetário líquido em três dimensões', '______', 0, '6cdb425426451dc8184fce4be08ab126.jpg', 'a9ff2e9b74be5eef58d6d63eab961fc7.jpg'),
 (219, 'AMARAL,Silvia Eugênia Do; NAGEM,Ronaldo Luiz', 'O uso de metáforas em campanhas de prevenção da AIDS ', '______', 0, 'b1b476848c9fd6d0683d4edd663956c3.jpg', '93169f84a8863b1410c480a2d87135a3.jpg'),
-(222, '______', 'Análise de uma prática de ensino, por meio de uma analogia, para alunos de 7 a 8 anos de idade.', ' ASSIS, Priscila Aparecida Mariano de; NAGEM, Ronaldo Luiz', 0, '75be5bed51aa5fea7319adeb66626d32.jpg', '875985f735b6b5c0503b84294c0bb6cd.jpg'),
+(222, ' ASSIS, Priscila Aparecida Mariano de; NAGEM, Ronaldo Luiz', 'Análise de uma prática de ensino, por meio de uma analogia, para alunos de 7 a 8 anos de idade.', '______', 0, '75be5bed51aa5fea7319adeb66626d32.jpg', '875985f735b6b5c0503b84294c0bb6cd.jpg'),
 (223, 'NAGEM,Ronaldo Luiz; BARBOSA,Catia R; MARCELOS,Maria de F; FIGUEROA,Ana M.S; FERRY,Alexandre da S; DELFINO,Douglas G', 'Rede internacional de pesquisa e analogias e metáforas na tecnologia, na educação, na ciência e na arte', '______', 0, '6ad7d411b6356c204a2a1fc1c6f99dce.jpg', 'd545826490ea0264a1daad2c44a02d2b.jpg'),
 (224, 'DE BARROS MOREIRA ,Rafael Campbell', 'Índice AMTEC', '______', 0, '670d7cf22789a6771f7722d3c4f10136.jpg', '43526aeefaa3c7cbfcb57e759a29abbb.jpg'),
 (225, 'NAGEM,Ronaldo Luiz; SANTOS,Eliane Diniz', 'O uso das analogias como uma nova proposta de ensino para os profissionais de saúde: Máquina de hemodiálise e o rim  ', '______', 0, 'fbd5baec39fd871aa8eaf33752e70365.jpg', 'a31c0ae15392a27232e33405f9056a97.jpg'),
@@ -150,9 +150,9 @@ INSERT INTO `banners` (`id`, `autor`, `titulo`, `palavras_chave`, `ano`, `banner
 (231, 'GONÇALVES,Vanilda Maria;NAGEM,Ronaldo Luiz', 'O pensamento analógico no entendimento e na geração de novas ideias/conceitos', '______', 0, 'ae7c33669608589c40a38719b98f6482.jpg', 'e617828632280edf6f26fae2c910008f.jpg'),
 (232, 'NAGEM, Ronaldo Luiz; AMARAL, Silvia Eugênia; SANTOS, Elândia dos; SILVA, Eliana Aparecida Ferreira da; SANTOS, Elizângela dos; VELOSO, Eloísa Maria Clarete; LUZ, Maria de Fátima da; ALMEIDA, Vladimir Lourenço de', 'A recepção por mulheres negras das campanhas institucionalizadas de saúde sexual e reprodutiva', '______', 2005, '92693e6cd9690126d625afc2871dccd1.jpg', '399cb53da8ed9e811439bf41d7511db2.jpg'),
 (233, 'DE BARROS MOREIRA, R.; NAGEM, R. L.', 'Índice AMTEC Vol.2', '______', 0, '56a6fa53b9987a5c193dfa5e0eac2a1a.jpg', '38d004629bf47b973c0dc082af033ddb.jpg'),
-(306, '______', 'Foto multiverso 12', '______', 0, '9a2a00d0c00b1eff687a10d9ac7b625f.jpg', 'd09a70691d7654dc98c7a80bcd3ab538.jpg'),
+(306, '______', 'Foto multiverso 12', '______', 0, '9a2a00d0c00b1eff687a10d9ac7b625f.jpg', '9a2a00d0c00b1eff687a10d9ac7b625f.jpg'),
 (303, '______', 'Foto multiverso 09', '______', 0, 'b19c7b7cb1986d7afef672f85d1c7164.jpg', '29f49490f5118fe8b55f45446dbb95dc.jpg'),
-(304, '______', 'Foto multiverso 10', '______', 0, 'cf0f1e6e32a1769ab80fec2739947d7d.jpg', 'd33647c442dd2cecc229263ddc6f1d46.jpg'),
+(304, '______', 'Foto multiverso 10', '______', 0, 'cf0f1e6e32a1769ab80fec2739947d7d.jpg', '781191c52a60583d49450287d96ee481.jpg'),
 (245, '______', 'Museomix', '______', 0, 'd4172162ee4db83365b084280622d9bf.jpg', 'a8c636c94766d62fcae01e01068da515.jpg'),
 (246, 'MATTHEWS,Michael', 'Email', '______', 0, 'a0eee1c386382f9c1bf5a36512139272.jpg', '8e8490d85908fcd2f63227d8655bdb14.jpg'),
 (247, '______', 'Índice de analogias e metáforas', '______', 0, '42cada12f793e9c2561bc9cea3151b08.jpg', '1e7fb6cda79a56aa1d400b88b478b0b8.jpg'),
@@ -191,7 +191,7 @@ INSERT INTO `banners` (`id`, `autor`, `titulo`, `palavras_chave`, `ano`, `banner
 (281, 'BARBOSA, Wilbert Viana; FERRY, Alexandre da Silva', 'MAPES: Uma Ferramenta Digital para Suporte na Análise de Analogias', '______', 2018, '25daf6e58d7fccb3b5a373125429ebfe.jpg', '68443c5bf5ed24f178245afd27fd9fd7.jpg'),
 (282, 'FONSECA, Rafael Bruno da Cunha; FERNANDES, Rayane de Souza; MAGALHÃES, Renato José de; FERRY, Alexandre da Silva', 'Base de dados digital sobre conjuntos expositivos baseados em modelagem', '______', 2018, 'db77937b9ac5b150447b51224b28b536.jpg', '4c0ede3dc6340e43e9abc69d6cc6c092.jpg'),
 (283, 'SCHMIDT, Núbia Silva; FERRY, Alexandre da Silva', 'Dificuldades no ensino e aprendizagem de conteúdos de química por estudantes deficientes visuais', '______', 2018, '908754cc26b8a2bfa6da9d36e76d3726.jpg', '2a0275776c51e7401de53ee143ca8821.jpg'),
-(305, '______', 'Foto multiverso 11', '______', 0, '7f247296e87d612250ac8276671c7e87.jpg', 'f1f64fb282fabdf8f71167b368bb21b6.jpg');
+(305, '______', 'Foto multiverso 11', '______', 0, '7f247296e87d612250ac8276671c7e87.jpg', '7f247296e87d612250ac8276671c7e87.jpg');
 
 -- --------------------------------------------------------
 
@@ -206,17 +206,9 @@ CREATE TABLE IF NOT EXISTS `convites` (
   `mes` int(11) NOT NULL,
   `ano` int(11) NOT NULL,
   `convite` varchar(100) NOT NULL,
+  `titulo` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `convites`
---
-
-INSERT INTO `convites` (`id`, `dia`, `mes`, `ano`, `convite`) VALUES
-(26, 3, 2, 2018, '640503b477faee6915383b0467ecc927.pdf'),
-(23, 7, 9, 2020, 'nao_encontrado.pdf'),
-(24, 3, 1, 2020, 'nao_encontrado.pdf');
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -229,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `genero` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `genero` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -248,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `livros` (
   `livro` varchar(100) NOT NULL,
   `capa` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -261,7 +253,15 @@ CREATE TABLE IF NOT EXISTS `tipo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tipo`
+--
+
+INSERT INTO `tipo` (`id`, `tipo`) VALUES
+(21, 'Artigo'),
+(22, 'Dissertação');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

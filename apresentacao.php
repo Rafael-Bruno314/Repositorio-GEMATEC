@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
     <title>Apresentações GEMATEC</title>
+		
+		<meta name="description" content="Encontre slides de apresentações feitas durante os encontros semanais sobre estudos em analogias, metáforas e modelos produzidos pelo Grupo de Estudos em Metáforas e Analogias na Tecnologia, na Educação e na Ciência (GEMATEC) do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG).">
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +26,8 @@
 	  <noscript>Desculpe, mas seu navegador não suporta <b>JavaScript</b>, ou ele pode estar desabilitado! Sua experiência com esse sistema ficará seriamente afetada!</noscript>
   </head>
   
-  <?php 	
+  <?php
+		header( 'Content-Type: text/html; charset=utf-8' );
 	  include('class/conectar_banco.php');
 	  include('ano_config.php');
   ?>
@@ -33,7 +36,7 @@
     <script>w3.includeHTML();</script>	
     <div w3-include-html="css/navbar_publica.html"></div> 
     <div class="container">
-	    <h1>Apresentações GEMATEC</h1>
+	    <h1>Slides de apresentações GEMATEC</h1>
       <hr>
 	    <form class="form-inline" name="frmBusca" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>?a=buscar">
         
@@ -73,9 +76,9 @@
         
         // Verificamos se a ação é de busca
         if ($a == "buscar") {
-          $titulo = utf8_decode(trim($_POST['titulo']));
-          $autor = utf8_decode(trim($_POST['autor']));
-          $palavras_chave = utf8_decode(trim($_POST['palavras_chave']));
+          $titulo =  (trim($_POST['titulo']));
+          $autor =  (trim($_POST['autor']));
+          $palavras_chave =  (trim($_POST['palavras_chave']));
           $ano = trim($_POST['ano']);
             
           if ($ano == "ano") {
@@ -94,16 +97,49 @@
               echo "<div class='col-sm-6 col-md-12'>";
               echo "<div class='thumbnail'>";
               echo "<div class='caption'>";
-              echo "<strong><p class='destaque'>" . utf8_encode($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($apresentacao->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($apresentacao->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
-              echo "<br>";
-              echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" . utf8_encode($apresentacao->titulo) . " class='btn btn-primary' id='down_button' data-loading-text='Loading...' role='button'>Download</a></p>";
+
+              //echo "<strong><p class='destaque'>" .  ($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Autor: </b><span>" .  ($apresentacao->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" .  ($apresentacao->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
+							
+							
+							echo "<strong><p class='destaque'>" .  ($apresentacao->titulo) . "</p></strong><hr class='space' width='50%'>";
+							
+							if( ($apresentacao->autor != "Inexistente")){
+								echo "<b class='titulo'>Autor: </b><span>" .  ($apresentacao->autor) . "</span></br>";
+							}else{
+								
+							}
+							
+
+							if( ($apresentacao->palavras_chave) != "Inexistente"){
+								echo "<b class='titulo'>Palavras-chave: </b><span>" .  ($apresentacao->palavras_chave) . "</span></br>";
+							}else{
+								
+							}
+							
+							if($apresentacao->ano != "0000"){
+								echo "<b class='titulo'>Ano de publicação: </b><span>" . $apresentacao->ano . "</span><br>";
+							}else{
+
+							}
+							
+							
+							echo "<br>";
+							if($apresentacao->apresentacao == ""){
+								//echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" .  ($apresentacao->titulo) . " class='btn btn-primary' id='down_button' data-loading-text='Loading...' role='button'>Download</a></p>";
+							}else{
+								echo "<p><a href='Apresentacoes/" . $apresentacao->apresentacao . "' download=" .  ($apresentacao->titulo) . " class='btn btn-primary' id='down_button' data-loading-text='Loading...' role='button'>Download</a></p>";
+							}
+							
+							echo "</div>";							
               echo "</div>";
+								echo "<hr>";
               echo "</div>";
-              echo "</div>";
-            }      
+							
+            }
+
             // Se não houver registros
           } else {
-            echo "<h1>Nenhuma apresentação foi encontrada</h1>";
+            echo "<b>Nenhuma apresentação foi encontrada</b>";
           }
         }
       ?>

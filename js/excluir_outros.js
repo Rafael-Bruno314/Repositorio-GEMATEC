@@ -23,7 +23,7 @@ function Manda_dados(id){
 
 function trataDados(){
 	var info = ajax.responseText;
-	alert("Excluido com sucesso");
+	alert("Excluído com sucesso");
 	var div = document.getElementById("saida");
 	div.innerHTML=info;
 }

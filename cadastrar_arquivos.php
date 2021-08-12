@@ -1,5 +1,6 @@
 <?php 
-	#include("class/protect.php"); 
+	#include("class/protect.php");
+	header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -16,12 +17,12 @@
 <?php
 	// Se o usuário clicou no botão cadastrar efetua as ações
 	if (isset($_POST['cad_dps_da_ganbiarra'])) {
-    $autor = utf8_decode($_POST['autor']);
-    $titulo = utf8_decode($_POST['titulo']);
-    $palavras_chave = utf8_decode($_POST['palavras_chave']);
+    $autor = ($_POST['autor']);
+    $titulo = ($_POST['titulo']);
+    $palavras_chave = ($_POST['palavras_chave']);
     $ano = $_POST['ano'];
     $arquivo = $_FILES["arquivo"];
-    $tipo = utf8_decode($_POST['tipo']);
+    $tipo = ($_POST['tipo']);
 
     if ($ano == "Ano de Publicação") {
       $ano = "0000";
@@ -60,7 +61,6 @@
 			preg_match("/\.(pdf|docx|doc){1}$/i", $arquivo["name"], $ext);
 			if ($ext[1] != "pdf" && $ext[1] != "docx" && $ext[1] != "doc") {
 				echo "<script>alert('Formato de arquivo inválido!\\nPor favor utilize os formatos pdf, docx ou doc')</script>";
-				$nome_arquivo = "nao_encontrado.pdf";
 			}
 			else {
 				// Gera um nome único para a imagem
@@ -75,16 +75,13 @@
 
 			}
 		}
-		else{
-			$nome_arquivo = "nao_encontrado.pdf";
-		}
 		
 		// Insere os dados no banco							
 		$sql = "INSERT INTO arquivos(autor,tipo,titulo,palavras_chave,ano,arquivo) VALUES ('$autor','$tipo','$titulo','$palavras_chave','$ano','$nome_arquivo')"; //Linha problema!!!
 		mysql_query($sql, $conn) or die("<font style=Arial color=red><h1>Houve um erro na gravação dos dados</h1></font>");
 			
 		if (!$sql) {
-			echo "<script>alert('Não deu...')</script>";
+			echo "<script>alert('Não foi possível cadastrar o arquivo')</script>";
 		} 
 		else {
 			echo "<script>alert('Cadastrado com sucesso')</script>";
@@ -180,7 +177,7 @@
 									<select class="form-control" id="tipo" name="tipo" onChange="Add_tipo()">
 										<option value="selecione">Selecione</option>
 											<?php while ($prod = mysql_fetch_array($query)) { ?>
-										<option value="<?php echo utf8_encode($prod['tipo']); ?>"><?php echo utf8_encode($prod['tipo']); ?></option>
+										<option value="<?php echo  ($prod['tipo']); ?>"><?php echo  ($prod['tipo']); ?></option>
 											<?php } ?>
 										<option value="outro">Outro</option>
 									</select>
@@ -207,7 +204,7 @@
 
 						<tr>
 							<td align=left>
-								<label><h4>Documento do Arquivo</h4></label> <a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do arquivo (.pdf, .docx, .doc)">?</a> 
+								<label><h4>Documento do Arquivo</h4></label> <a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do arquivo (.pdf, .docx, .doc). Evite arquivos com nomes muito grandes">?</a> 
 							</td>
 							<div class="col-sm-10">
 								<td>
@@ -252,7 +249,7 @@
 					echo "<div class='col-sm-6 col-md-6'>";
 					echo "<div class='thumbnail'>";
 					echo "<div class='caption'>";
-					echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . utf8_encode($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . utf8_encode($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
+					echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" .  ($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" .  ($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" .  ($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" .  ($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";

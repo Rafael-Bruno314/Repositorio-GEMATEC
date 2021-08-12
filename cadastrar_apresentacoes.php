@@ -1,4 +1,5 @@
 <?php
+	header( 'Content-Type: text/html; charset=utf-8' );
 	include('class/conectar_banco.php');
 	include('ano_config.php');
 ?>
@@ -11,9 +12,9 @@
 <?php
 	// Se o usuário clicou no botão cadastrar efetua as ações
 	if (isset($_POST['cad_dps_da_ganbiarra'])) {
-    $autor = utf8_decode($_POST['autor']);
-    $titulo = utf8_decode($_POST['titulo']);
-    $palavras_chave = utf8_decode($_POST['palavras_chave']);
+    $autor =  ($_POST['autor']);
+    $titulo =  ($_POST['titulo']);
+    $palavras_chave =  ($_POST['palavras_chave']);
     $ano = $_POST['ano'];
     $apresentacao = $_FILES["apresentacao"];
 
@@ -40,7 +41,7 @@
 			
 			if ($ext[1] != "pptx" && $ext[1] != "ppt" && $ext[1] != "pdf") {
 				echo "<script>alert('Formato de arquivo inválido!\\nPor favor utilize os formatos pptx, ppt ou pdf')</script>";
-				$nome_apresentacao = "nao_encontrado.pdf";
+				#$nome_apresentacao = "nao_encontrado.pdf";
 			} 
 			else {
 				// Gera um nome único para a imagem
@@ -54,16 +55,14 @@
 				//fim apresentacao	
 			}			
 		}
-		else{
-			$nome_apresentacao = "nao_encontrado.pdf";
-		}
+		
 		
     // Insere os dados no banco
     $sql = "INSERT INTO apresentacoes(autor,titulo,palavras_chave,ano,apresentacao) VALUES ('$autor','$titulo','$palavras_chave','$ano','$nome_apresentacao')";
     mysql_query($sql, $conn) or die("<font style=Arial color=red><h1>Houve um erro na gravação dos dados</h1></font>");
 		
 		if (!$sql) {
-			echo "<script>alert('Não deu...')</script>";
+			echo "<script>alert('Não foi possível cadastrar as apresentações')</script>";
 		} 
 		else {
 			echo "<script>alert('Cadastrado com sucesso')</script>";
@@ -106,7 +105,7 @@
   </head>
 
   <body>
-		<div w3-include-html="css/navbar_restrita.html"></div> 
+		<div w3-include-html="css/navbar_restrita.html"></div>
 		<script>w3.includeHTML();</script>
 	
 		<div class="container">
@@ -213,9 +212,9 @@
 					echo "<div class='col-sm-6 col-md-12'>";
 					echo "<div class='thumbnail'>";
 					echo "<div class='caption'>";
-					echo "<strong><p class='destaque'>" . utf8_encode($usuario->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Código:</b><span> " . $usuario->id . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($usuario->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($usuario->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br>";
+					echo "<strong><p class='destaque'>" .  ($usuario->titulo) . "</p></strong><hr class='space' width='50%'>" . "<b class='titulo'>Código:</b><span> " . $usuario->id . "</span></br>" . "<b class='titulo'>Autor: </b><span>" .  ($usuario->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" .  ($usuario->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br>";
 					echo "<br>";
-					echo "<p><a href='Apresentacoes/" . $usuario->apresentacao . "' download=" . utf8_encode($usuario->titulo) . " class='btn btn-primary' role='button'>Download</a></p>";
+					echo "<p><a href='Apresentacoes/" . $usuario->apresentacao . "' download=" .  ($usuario->titulo) . " class='btn btn-primary' role='button'>Download</a></p>";
 					echo "</div>";
 					echo "</div>";
 					echo "</div>";

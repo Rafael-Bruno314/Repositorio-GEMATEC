@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
+    
+		<meta name="description" content="Encontre banners e pôsters sobre estudos em analogias, metáforas e modelos produzidos pelo Grupo de Estudos em Metáforas e Analogias na Tecnologia, na Educação e na Ciência (GEMATEC) do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG).">
     
     <title>Banners/Pôsteres GEMATEC</title>
 
-    <link rel="icon" href="favicon.ico">
+		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	  <link href="css/estilo.css" rel="stylesheet">
@@ -34,6 +35,7 @@
       <hr>
 
       <?php
+				header( 'Content-Type: text/html; charset=utf-8' );
         include('ano_config.php');
       ?>
 
@@ -89,10 +91,10 @@
 
   // Verificamos se a ação é de busca
   if ($a == "buscar") {
-    $titulo = utf8_decode(trim($_POST['titulo']));
-    $ano = utf8_decode(trim($_POST['ano']));
-    $autor = utf8_decode(trim($_POST['autor']));
-    $palavras_chave = utf8_decode(trim($_POST['palavras_chave']));
+    $titulo =  (trim($_POST['titulo']));
+    $ano =  (trim($_POST['ano']));
+    $autor =  (trim($_POST['autor']));
+    $palavras_chave =  (trim($_POST['palavras_chave']));
 
     if ($ano == "ano") {
       $sql = mysql_query("SELECT * FROM banners WHERE titulo LIKE '%" . $titulo . "%' AND autor LIKE '%" . $autor . "%' AND palavras_chave LIKE '%" . $palavras_chave . "%' ORDER BY titulo"); //Busca Multipla, yeah!!!
@@ -120,11 +122,25 @@
         echo "<div class='thumbnail'>";
         echo "<table>";
         echo "<tr><td>";
-        echo "<a href='Banners/" . utf8_encode($usuario->banner) . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a>";
+        echo "<a href='Banners/" .  ($usuario->banner) . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Banner sobre metáforas, analogias e modelos produzidos pelo GEMATEC' /></a>";
         echo "</td><td width='10%' color: 'green'>";
         echo "</td><td>";
-        echo "<p><b class='titulo'>Título: </b><span>" . utf8_encode($usuario->titulo) . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($usuario->autor) . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($usuario->palavras_chave) . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $marca . "</span><br><br></p>";
-        echo "<a href='Banners/" . $usuario->banner . "' target='_blank'' class='btn btn-primary' role='button'><div class='space'>Abrir</div></a>    <a href='Banners/" . $usuario->banner . "' download=" . utf8_encode($usuario->titulo) . " class='btn btn-default' role='button'>Download</a>";
+        
+				echo "<p><b class='titulo'>Título: </b><span>" .  ($usuario->titulo) . "</span></br></p>"; 
+				
+				if( ($usuario->autor) != "______"){
+					echo "<p> <b class='titulo'>Autor: </b><span>" .  ($usuario->autor) . "</span></br></p>"; 
+				}
+				
+				if( ($usuario->palavras_chave) != "______"){
+					echo "<p> <b class='titulo'>Palavras-chave: </b><span>" .  ($usuario->palavras_chave) . "</span></br></p>"; 
+				}
+				
+				if( ($marca) != "______"){
+					echo "<p> <b class='titulo'>Ano de publicação: </b><span>" . $marca . "</span><br><br></p>";
+				}
+				
+				echo "<a href='Banners/" . $usuario->banner . "' target='_blank'' class='btn btn-primary' role='button'><div class='space'>Abrir</div></a>    <a href='Banners/" . $usuario->banner . "' download=" .  ($usuario->titulo) . " class='btn btn-default' role='button'>Download</a>";
         echo "</td></tr>";
         echo "</table>";
         echo "</div>";
@@ -132,7 +148,7 @@
       }
     }
     else {
-      echo "<h1>Nenhum banner foi encontrado</h1> <br><br><br><br> <hr>";
+      echo "<b>Nenhum banner foi encontrado</b> <br><br><br><br> <hr>";
     }
   }
 ?>

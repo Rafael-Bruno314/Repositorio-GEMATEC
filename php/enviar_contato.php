@@ -21,7 +21,7 @@
 	$conteudo .= "\n\n\nMensagem: ".$mensagem;
 	$conteudo = nl2br($conteudo);
 
-	$envio = mail("jonhyuio@gmail.com", $nome, $conteudo); //email a ser enviado/assunto/mensagem
+	$envio = mail("ferry.gematec@gmail.com", $nome, $conteudo); //email a ser enviado/assunto/mensagem
 
   if (!$envio) {
 	  echo "Ocorreu um erro no envio. Tente mais tarde...";

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>Convites & Resumos de Encontros Semanais do GEMATEC</title>
+		
+		<meta name="description" content="Encontre os resumos das palestras realizadas durante os encontros semanais pela data em que foram ministradas sobre estudos em analogias, metáforas e modelos produzidos pelo Grupo de Estudos em Metáforas e Analogias na Tecnologia, na Educação e na Ciência (GEMATEC) do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG).">
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +28,7 @@
 	<style>		
 		b.destaque_ano {
 			font-size: 25px;
-			color: #652E79;
+			color: #421E65;
 		}
 
 		b.destaque_mes {
@@ -37,7 +39,7 @@
 		
 		b.destaque_dia {
 			font-size: 25px;
-			color: #586DF4;
+			color: #D40B40;
 			padding-left:6%;
 		}
 
@@ -48,11 +50,11 @@
 			position: absolute;
 			border-radius: 5px;
 			background-color: #f5f5f5;
-			<!--color: green;-->
 		}	
 	</style>
   
-	<?php 	
+	<?php 
+		header( 'Content-Type: text/html; charset=utf-8' );
 		include('class/conectar_banco.php');
 		$query = mysql_query("SELECT * FROM convites");
 		error_reporting(0);
@@ -72,7 +74,7 @@
 			<div class="panel panel-primary">
 			<div class="panel-body">
 	
-				<details> <!--Como eu consegui fazer isso?!!!-->
+				<details>
 
 					<?php while($ano_array = mysql_fetch_array($ano)){ ?>
 						<summary><?php echo "<b class='destaque_ano'>". $ano_array['ano']."</b>";?></summary>
@@ -87,10 +89,19 @@
 								<summary><?php echo "<b class='destaque_mes'>". $mes."</b>";?></summary>
 								<?php $dia_select = mysql_query("SELECT DISTINCT dia FROM convites WHERE `ano` =".$ano_array[0]."&& `mes` =".$mes_array[0]); ?>
 								<?php $conv = mysql_query("SELECT convite FROM convites WHERE `ano` =".$ano_array[0]."&& `mes` =".$mes_array[0]); ?>
+								<?php $tit = mysql_query("SELECT titulo FROM convites WHERE `ano` =".$ano_array[0]."&& `mes` =".$mes_array[0]); ?>
 
 									<?php while($dia_array = mysql_fetch_array($dia_select)){ ?>
 										<?php $convite = mysql_fetch_object($conv); ?>
-										<?php echo	"<a href='Convites/".$convite->convite." 'target='_blank'' ><b class='destaque_dia'>". $dia_array['dia']." de ".$mes."<br></a></b>";?>
+										<?php $titulo = mysql_fetch_object($tit) ?>
+										
+									<?php if($convite->convite == ""){
+										echo	"<b class='destaque_dia'>". $dia_array['dia']." de ".$mes." - ".$titulo->titulo.  "<br></b>";
+									}else{
+										echo	"<a href='Convites/".$convite->convite." 'target='_blank'' ><b class='destaque_dia'>". $dia_array['dia']." de ".$mes." - ".$titulo->titulo.  "<br></a></b>";
+									}									?>
+										
+
 									<?php } ?>
 							</details>
 						<?php } ?>

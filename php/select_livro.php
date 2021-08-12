@@ -16,10 +16,10 @@
 
 	if ($numRegistros != 0) {
 		while ($informacoes = mysql_fetch_object($sql)) {
-			echo utf8_encode($informacoes->titulo)."@";
-			echo utf8_encode($informacoes->genero)."@";
-			echo utf8_encode($informacoes->autor)."@";
-			echo utf8_encode($informacoes->editora)."@";
+			echo  ($informacoes->titulo)."@";
+			echo  ($informacoes->genero)."@";
+			echo  ($informacoes->autor)."@";
+			echo  ($informacoes->editora)."@";
 			echo $informacoes->ano."@";
 		}
 	}

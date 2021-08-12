@@ -17,9 +17,9 @@
 	if ($numRegistros != 0) {
 		
 		while ($informacoes = mysql_fetch_object($sql)) {
-			echo utf8_encode($informacoes->autor)."@";
-			echo utf8_encode($informacoes->titulo)."@";
-			echo utf8_encode($informacoes->palavras_chave)."@";
+			echo  ($informacoes->autor)."@";
+			echo  ($informacoes->titulo)."@";
+			echo  ($informacoes->palavras_chave)."@";
 			echo $informacoes->ano."@";
 		}
 	}

@@ -1,5 +1,6 @@
 <?php 
-	#include("class/protect.php"); 
+	include("class/protect.php");
+	header( 'Content-Type: text/html; charset=utf-8' );	
 ?>
 
 <?php
@@ -67,7 +68,7 @@
 							<select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
 								<option value="">Escolha o título da obra que deseja alterar</option>
 									<?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-								<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo utf8_encode($titulo_muda['titulo'])?></option>
+								<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo  ($titulo_muda['titulo'])?></option>
 									<?php } ?>
 							</select>
 						</div>
@@ -118,7 +119,7 @@
 										<select class="form-control" id="tipo" name="tipo" onChange="Add_tipo()">
 											<option value="selecione">Selecione</option>
 												<?php while ($prod = mysql_fetch_array($comb)) { ?>
-											<option value="<?php echo utf8_encode($prod['tipo']); ?>"><?php echo utf8_encode($prod['tipo']); ?></option>
+											<option value="<?php echo  ($prod['tipo']); ?>"><?php echo  ($prod['tipo']); ?></option>
 												<?php } ?>
 											<option value="outro">Outro</option>
 										</select>
@@ -146,7 +147,7 @@
 							<tr>
 								<td align=left>
 									<label><h4>Arquivo</h4></label>
-									<a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do arquivo (.pdf, .docx, .doc)">?</a> <!-- Criar o popup de ajuda -->
+									<a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do arquivo (.pdf, .docx, .doc). Permite-se adicionar (caso não tenha) e alterar um arquivo, mas se deseja apenas apagar um arquivo então é necessário excluir esse convite e criar outro.">?</a> <!-- Criar o popup de ajuda -->
 								</td>
 								<div class="col-sm-10">
 									<td>
@@ -173,10 +174,10 @@
 			<?php
 				if (isset($_POST['alt_dps_da_ganbiarra'])) {
 					$codigo = $_POST['titulo_mudar'];
-					$autor = utf8_decode($_POST['autor']);
-					$titulo = utf8_decode($_POST['titulo']);
-					$tipo = utf8_decode($_POST['tipo']);
-					$palavras_chave = utf8_decode($_POST['palavras_chave']);
+					$autor =  ($_POST['autor']);
+					$titulo =  ($_POST['titulo']);
+					$tipo =  ($_POST['tipo']);
+					$palavras_chave =  ($_POST['palavras_chave']);
 					$ano = $_POST['ano'];
 					$arquivo = $_FILES["arquivo"];
 						
@@ -191,7 +192,7 @@
 								$endereco = $row->arquivo;
 							}
 
-							if($endereco != "nao_encontrado.pdf")
+							if($endereco != "")
 							{
 								$diretorio = "Arquivos/";
 								$apagar = $diretorio . $endereco;
@@ -215,6 +216,7 @@
 							$query = mysql_query("SELECT * FROM arquivos WHERE id= $codigo");
 							$usuario = mysql_fetch_array($query);
 							$nome_imagem = $usuario['arquivo'];
+							
 						}
 								
 						if ($titulo == "" && $ano == "" && $autor == "" && $palavras_chave == "" && $codigo == "Selecione") {
@@ -239,13 +241,13 @@
 								$palavras_chave = $usuario['palavras_chave'];
 							}
 										
-							if ($ano == "Ano de Publicação") {
+							if ($ano == "Ano de Publicação"|| $ano == "") {
 								$query = mysql_query("SELECT * FROM arquivos WHERE id= $codigo");
 								$usuario = mysql_fetch_array($query);
 								$ano = $usuario['ano'];
 							}
 										
-							if ($tipo == "selecione") {
+							if ($tipo == "selecione" || $tipo == "") {
 								$query = mysql_query("SELECT * FROM arquivos WHERE id= $codigo");
 								$usuario = mysql_fetch_array($query);
 								$tipo = $usuario['tipo'];
@@ -262,9 +264,9 @@
 							}
 									
 							$alterar = "UPDATE `arquivos` SET `tipo`= '$tipo',`autor`= '$autor',`titulo`= '$titulo',`palavras_chave`='$palavras_chave',`ano`='$ano',`arquivo`='$nome_imagem' WHERE id = '$codigo'";
-										
+							
 							if (!$alterar) {
-								echo "<script>alert('Não deu...')</script>";
+								echo "<script>alert('Não foi possível alterar o arquivo')</script>";
 							}
 							else {
 								echo "<script>alert('Alterado com sucesso')</script>";
@@ -278,7 +280,7 @@
 								echo "<div class='col-sm-6 col-md-12'>";
 								echo "<div class='thumbnail'>";
 								echo "<div class='caption'>";
-								echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" . utf8_encode($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" . utf8_encode($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" . utf8_encode($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
+								echo "<strong><p class='destaque'> <a href='Arquivos/" . $arquivos->arquivo . " 'target='_blank'' class='titulo'>" .  ($arquivos->titulo) . "</p></strong></a><hr class='space' width='50%'>" . "<b class='titulo'>Tipo de texto: </b><span>" .  ($arquivos->tipo) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" .  ($arquivos->autor) . "</span></br>" . "<b class='titulo'>Palavras-chave: </b><span>" .  ($arquivos->palavras_chave) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $arquivos->ano . "</span><br><br>";
 								echo "<p><a href='Arquivos/" . $arquivos->arquivo . "' target='_blank'' class='btn btn-primary' role='button'>Abrir</a> <a href='Arquivos/" . $arquivos->arquivo . "' download=" . ($arquivos->titulo) . " class='btn btn-default' role='button'>Download</a></p>";
 								echo "</div>";
 								echo "</div>";

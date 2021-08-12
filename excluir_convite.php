@@ -1,5 +1,6 @@
 <?php 
-	#include("class/protect.php"); 
+	#include("class/protect.php");
+		header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -79,7 +80,7 @@
 		  			<div class="form-group">
 		 					<tr>
 								<td align=left>
-									<label><h4>Código do convite que será excluido:</h4></label>
+									<label><h4>Código do convite que será excluído:</h4></label>
 								</td>
 								<td>
 									<select class="form-control" id="id" name="id">
@@ -169,16 +170,16 @@
 					
         	$excluir = "DELETE FROM `convites` WHERE id = '$codigo'"; //Linha problema!!!
         
-					if($convite != "nao_encontrado.pdf") {
+					if($convite != "") {
 						$diretorio = "Convites/";
 						$convite_apagado = $diretorio . $convite;
 						unlink($convite_apagado);
 					}
         
 					if (!$excluir) {
-							echo "<script>alert('Não deu')</script>";
+							echo "<script>alert('Não foi possível excluir o convite')</script>";
 					} else {
-							echo "<script>alert('Excluido com sucesso')</script>";
+							echo "<script>alert('Excluído com sucesso')</script>";
 					}
         
         	mysql_query($excluir, $conn) or die("<font style=Arial color=red><h1>Houve um erro na exclusão dos dados</h1></font>");

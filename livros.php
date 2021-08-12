@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>Sumários de Livros</title>
+		
+		<meta name="description" content="Encontre sumários dos livros produzidos e pertencentes ao Grupo de Estudos em Metáforas e Analogias na Tecnologia, na Educação e na Ciência (GEMATEC) do Centro Federal de Educação Tecnológica de Minas Gerais (CEFET-MG) sobre estudos em analogias, metáforas e modelos.">
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +26,8 @@
 	  <noscript>Desculpe, mas seu navegador não suporta <b>JavaScript</b>, ou ele pode estar desabilitado! Sua experiência com esse sistema ficará seriamente afetada!</noscript>
   </head>
 
-  <?php 	
+  <?php
+		header( 'Content-Type: text/html; charset=utf-8' );
     include('class/conectar_banco.php');
     include('ano_config.php');
     $query = mysql_query("SELECT * FROM genero");
@@ -63,7 +66,7 @@
           <select class="form-control" id="genero" name="genero">
             <option value = "genero">Gênero</option>
             <?php while($prod = mysql_fetch_array($query)) { ?>
-              <option value="<?php echo utf8_encode($prod['genero']) ?>"><?php echo utf8_encode($prod['genero']) ?></option>
+              <option value="<?php echo  ($prod['genero']) ?>"><?php echo  ($prod['genero']) ?></option>
             <?php } ?>
           </select>
         </div>
@@ -84,11 +87,11 @@
         $a = $_GET['a'];
 
         if ($a == "buscar") {
-          $titulo = utf8_decode(trim($_POST['titulo']));
-          $autor = utf8_decode(trim($_POST['autor']));
-          $editora = utf8_decode(trim($_POST['editora']));
+          $titulo =  (trim($_POST['titulo']));
+          $autor =  (trim($_POST['autor']));
+          $editora =  (trim($_POST['editora']));
           $ano = trim($_POST['ano']);
-          $genero  = utf8_decode(trim($_POST['genero']));
+          $genero  =  (trim($_POST['genero']));
           
           if ($genero == "genero" || $ano == "ano") {
             
@@ -119,15 +122,33 @@
               echo "<div class='thumbnail'>";
               echo "<a href='Capas/" . $livros->capa . " 'target='_blank'' ><img src='Capas/" . $livros->capa . "' alt='Foto de exibição' /></a>";
               echo "<div class='caption'>";
-              echo "<strong><p class='destaque'>" . utf8_encode($livros->titulo) . "</p></strong>" . "<b class='titulo'>Gênero: </b><span>" . utf8_encode($livros->genero) . "</span></br>" . "<b class='titulo'>Autor: </b><span>" . utf8_encode($livros->autor) . "</span></br>" . "<b class='titulo'>Editora: </b><span>" . utf8_encode($livros->editora) . "</span></br>" . "<b class='titulo'>Ano de publicação: </b><span>" . $livros->ano . "</span><br><br>";
-              echo "</div>";
+              
+							echo "<strong><p class='destaque'>" .  ($livros->titulo) . "</p></strong>"; 
+							
+							if( ($livros->genero) != "Indefinido"){
+								echo "<b class='titulo'>Gênero: </b><span>" .  ($livros->genero) . "</span></br>"; 
+							}
+							
+							if( ($livros->autor) != "Inexistente"){
+								echo "<b class='titulo'>Autor: </b><span>" .  ($livros->autor) . "</span></br>"; 
+							}
+							
+							if( ($livros->editora) != "Inexistente"){
+								echo "<b class='titulo'>Editora: </b><span>" .  ($livros->editora) . "</span></br>";
+							}
+							
+							if( ($livros->ano) != "0000"){
+								echo "<b class='titulo'>Ano de publicação: </b><span>" . $livros->ano . "</span><br><br>";
+							}
+							
+							echo "</div>";
               echo "</div>";
               echo "</div>";
             }
               echo "</div>";	
           }
           else {
-            echo "<h1> Nenhum livro foi encontrado </h1>";
+            echo "<b> Nenhum livro foi encontrado </b>";
           }
         }
       ?>

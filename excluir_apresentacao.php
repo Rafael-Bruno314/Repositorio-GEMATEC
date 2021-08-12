@@ -1,5 +1,6 @@
 <?php 
-	#include("class/protect.php"); 
+	#include("class/protect.php");
+	header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -68,7 +69,7 @@
 						<select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
 							<option value="">Escolha o título da obra que deseja alterar</option>
 								<?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-									<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo utf8_encode($titulo_muda['titulo'])?></option>
+									<option value="<?php echo ($titulo_muda['id']) ?>"><?php echo  ($titulo_muda['titulo'])?></option>
 								<?php } ?>
 						</select>
 					</div>
@@ -161,17 +162,17 @@
 							
 						$excluir = "DELETE FROM `apresentacoes` WHERE id = '$codigo'"; //Linha problema!!!
 							
-						if($apresentacao != "nao_encontrado.pdf") {
+						if($apresentacao != "") {
 							$diretorio       = "Apresentacoes/";
 							$arquivo_apagado = $diretorio . $apresentacao;
 							unlink($arquivo_apagado);
 						}
 					
 						if (!$excluir) {
-							echo "<script>alert('Não deu')</script>";
+							echo "<script>alert('Não foi possível excluir a apresentação')</script>";
 						} 
 						else {
-							echo "<script>alert('Excluido com sucesso')</script>";
+							echo "<script>alert('Excluído com sucesso')</script>";
 						}
 							
 						mysql_query($excluir, $conn) or die("<font style=Arial color=red><h1>Houve um erro na exclusão dos dados</h1></font>");

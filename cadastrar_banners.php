@@ -1,5 +1,6 @@
 <?php 
-	#include("class/protect.php"); 
+	include("class/protect.php");
+	header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -15,9 +16,9 @@
 <?php
 	// Se o usuário clicou no botão cadastrar efetua as ações
 	if (isset($_POST['cad_dps_da_ganbiarra'])) {
-    $autor = (utf8_decode($_POST['autor']));
-    $titulo = (utf8_decode($_POST['titulo']));
-    $palavras_chave = (utf8_decode($_POST['palavras_chave']));
+    $autor = ( ($_POST['autor']));
+    $titulo = ( ($_POST['titulo']));
+    $palavras_chave = ( ($_POST['palavras_chave']));
     $ano = $_POST['ano'];
     $banner = $_FILES["banner"];
     
@@ -161,7 +162,7 @@
 		mysql_query($sql, $conn) or die("<font style=Arial color=red><h1>Houve um erro na gravação dos dados</h1></font>");
 		
 		if (!$sql) {
-			echo "<script>alert('Não deu...')</script>";
+			echo "<script>alert('Não foi possível cadastrar o banner')</script>";
 		} 
 		else {
 			echo "<script>alert('Cadastrado com sucesso')</script>";
@@ -308,7 +309,7 @@
 				while ($usuario = mysql_fetch_object($sql)) {
 					print '<table border="0">';
 					echo "<tr><td><a href='Banners/" . $usuario->banner . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a></td><td>&nbsp&nbsp&nbsp&nbsp</td>";
-					echo "&nbsp&nbsp<td align='left'><b>Título:</b> " . utf8_encode($usuario->titulo) . "</br>" . " <b>Autor:</b> " . utf8_encode($usuario->autor) . "</br>" . " <b>Palavras-chave:</b> " . utf8_encode($usuario->palavras_chave) . "</br>" . " <b>Ano de publicação:</b> " . $usuario->ano . "</td></tr><br />";
+					echo "&nbsp&nbsp<td align='left'><b>Título:</b> " .  ($usuario->titulo) . "</br>" . " <b>Autor:</b> " .  ($usuario->autor) . "</br>" . " <b>Palavras-chave:</b> " .  ($usuario->palavras_chave) . "</br>" . " <b>Ano de publicação:</b> " . $usuario->ano . "</td></tr><br />";
 					print '</table>';
 				}
 				echo "<hr>";

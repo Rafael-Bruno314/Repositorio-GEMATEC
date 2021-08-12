@@ -1,5 +1,6 @@
 <?php
-	#include("class/protect.php"); 
+	#include("class/protect.php");
+		header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -19,6 +20,7 @@
     $dia = $_POST['dia'];
     $nome_mes = ($_POST['nome_mes']);
     $ano = $_POST['ano'];
+    $titulo = $_POST['titulo'];
     $convite = $_FILES["convite"];
     
 		if($dia == "" || $nome_mes == "" || $ano == ""){
@@ -39,15 +41,13 @@
 				// Faz o upload da imagem para seu respectivo caminho
 				move_uploaded_file($convite["tmp_name"], $caminho_convite);
 				//fim convite
-					}else{
-				$nome_convite = "nao_encontrado.pdf";
 			}
-
-			$sql = "INSERT INTO convites(dia,mes,ano,convite) VALUES ('$dia','$nome_mes','$ano','$nome_convite')"; //Linha problema!!!
+			
+			$sql = "INSERT INTO convites(dia,mes,ano,titulo,convite) VALUES ('$dia','$nome_mes','$ano','$titulo','$nome_convite')"; //Linha problema!!!
 			mysql_query($sql, $conn) or die("<font style=Arial color=red><h1>Houve um erro na gravação dos dados</h1></font>");
 			
 			if (!$sql) {
-				echo "<script>alert('Não deu...')</script>";
+				echo "<script>alert('Não foi possível cadastrar o convite')</script>";
 			} 
 			else {
 				echo "<script>alert('Cadastrado com sucesso')</script>";
@@ -165,10 +165,16 @@
 						</select>
 		  		</div>
 		  		<br><br>
+					
+					<div class="form-group">
+						<label><h4>Título da apresentação do dia:</h4></label>
+						<input type="text" class="form-control" id="titulo" name="titulo">
+					</div>
+		  		<br><br>
 		  
 		  		<div class="form-group">
 						<label><h4>Documento do Convite
-						<a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do convite (.pdf, .docx, .doc)">?</a> <!-- Criar o popup de ajuda -->
+						<a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do convite (.pdf, .docx, .doc). Se não tiver nenhum arquivo então, apenas deixe como está">?</a> <!-- Criar o popup de ajuda -->
 						</h4></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 						<input type="file" name="convite" class="form-control" id="convite">
 		  		</div>

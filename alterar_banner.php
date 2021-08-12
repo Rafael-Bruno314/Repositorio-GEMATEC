@@ -1,6 +1,7 @@
 <?php
   include('class/conectar_banco.php');
   include('ano_config.php');
+	header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -63,7 +64,7 @@
 			        <select id="titulo_mudar" name="titulo_mudar" class="form-control" id="id" name="id" onChange="loadDoc(myFunction)">
 				        <option value="">Escolha o título da obra que deseja alterar</option>
 				          <?php while ($titulo_muda = mysql_fetch_array($query_mudar)) { ?>
-				        <option value="<?php echo  utf8_encode($titulo_muda['id']) ?>"><?php echo  utf8_encode($titulo_muda['titulo'])?></option>
+				        <option value="<?php echo   ($titulo_muda['id']) ?>"><?php echo   ($titulo_muda['titulo'])?></option>
 				          <?php } ?>
 			        </select>
 			      </div>
@@ -150,10 +151,10 @@
 
     <?php
       if (isset($_POST['alt_dps_da_ganbiarra'])) {
-        $codigo = utf8_decode($_POST['titulo_mudar']);
-        $autor = utf8_decode($_POST['autor']);
-        $titulo = utf8_decode($_POST['titulo']);
-        $palavras_chave = utf8_decode($_POST['palavras_chave']);
+        $codigo =  ($_POST['titulo_mudar']);
+        $autor =  ($_POST['autor']);
+        $titulo =  ($_POST['titulo']);
+        $palavras_chave =  ($_POST['palavras_chave']);
         $ano = $_POST['ano'];
         $banner = $_FILES["banner"];
       
@@ -333,7 +334,7 @@
             $alterar = "UPDATE `banners` SET `autor`= '$autor',`titulo`= '$titulo',`palavras_chave`='$palavras_chave',`ano`='$ano',`banner`='$nome_imagem',`thumb`='$nome_imagem_t' WHERE id = '$codigo'"; //Vai alterar o banner e a thumb!
       
             if (!$alterar) {
-              echo "<script>alert('Não deu...')</script>";
+              echo "<script>alert('Não foi possível alterar o banner')</script>";
             }
             else {
               echo "<script>alert('Alterado com sucesso')</script>";
@@ -351,7 +352,7 @@
               echo "<a href='Banners/" . $usuario->banner . " 'target='_blank'' ><img src='Thumbs/" . $usuario->thumb . "' alt='Foto de exibição' /></a>";
               echo "</td><td width='10%' color: 'green'>";
               echo "</td><td>";
-              echo "<p><b class='titulo'>Código: </b><span>" . $usuario->id . "</span></br></p><p><b class='titulo'>Título: </b><span>" .  utf8_encode($usuario->titulo) . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" .  utf8_encode($usuario->autor) . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" .  utf8_encode($usuario->palavras_chave) . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br><br></p>";
+              echo "<p><b class='titulo'>Código: </b><span>" . $usuario->id . "</span></br></p><p><b class='titulo'>Título: </b><span>" .   ($usuario->titulo) . "</span></br></p><p>" . "<b class='titulo'>Autor: </b><span>" .   ($usuario->autor) . "</span></br></p><p>" . "<b class='titulo'>Palavras-chave: </b><span>" .   ($usuario->palavras_chave) . "</span></br></p><p>" . "<b class='titulo'>Ano de publicação: </b><span>" . $usuario->ano . "</span><br><br></p>";
               echo "</td></tr>";
               echo "</table>";
               echo "</div>";

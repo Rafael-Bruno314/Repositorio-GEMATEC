@@ -1,5 +1,6 @@
 <?php 
   #include("class/protect.php"); 
+	header( 'Content-Type: text/html; charset=utf-8' );
 ?>
 
 <?php
@@ -34,7 +35,7 @@
           $endereco = $row->convite;
         }
         
-        if($endereco != "nao_encontrado.pdf"){
+        if($endereco != ""){
           $diretorio = "Convites/";
         $apagar = $diretorio . $endereco;
         unlink($apagar);
@@ -80,7 +81,7 @@
       $alterar = "UPDATE `convites` SET `dia`= '$dia',`mes`= '$nome_mes',`ano`= '$ano',`convite`='$nome_convite' WHERE id = '$codigo'";
           
     if (!$alterar) {
-        echo "<script>alert('Não deu...')</script>";
+        echo "<script>alert('Não foi possível alterar o convite')</script>";
       } 
       else {
         echo "<script>alert('Alterado com sucesso')</script>";
@@ -252,7 +253,7 @@
               
             <div class="form-group">
 					    <label><h4>Documento do Convite
-					      <a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do convite (.pdf, .docx, .doc)">?</a> <!-- Criar o popup de ajuda -->
+					      <a tabindex="0" class="btn btn-primary btn-xs" role="button" data-toggle="popover" data-trigger="focus" title="Ajuda" data-content="Adicione o arquivo correspondente ao documento do convite (.pdf, .docx, .doc). Permite-se adicionar (caso não tenha) e alterar um arquivo, mas se deseja apenas apagar um arquivo então é necessário excluir esse convite e criar outro.">?</a> <!-- Criar o popup de ajuda -->
 					    </h4></label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 					    <input type="file" name="convite" class="form-control" id="convite">
 				    </div>

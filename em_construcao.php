@@ -57,8 +57,8 @@
 
     .middle {
       position: absolute;
-      top: 10%;
-      left: 50%;
+      top: 15%;
+      left: 55%;
       transform: translate(-50%, -50%);
       text-align: center;
     }
@@ -71,6 +71,7 @@
     .aviso {
       font-size: 100%;
       color: #200D39;
+			background-color: #fff;
     }
 
   </style>
@@ -81,7 +82,7 @@
 
     <div class="bgimg">
       <div class="topleft">
-	      <p><img src="simbolo.png" style="max-width:20%;">GEMATEC</p>
+	      <p class = "aviso"><img src="simbolo.png" style="max-width:20%;">GEMATEC</p>
       </div>
 
       <div class="middle">
