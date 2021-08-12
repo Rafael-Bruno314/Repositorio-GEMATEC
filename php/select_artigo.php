@@ -5,7 +5,7 @@
 	header("Last-Modified: {$gmtDate} GMT"); 
 	header("Cache-Control: no-cache, must-revalidate"); 
 	header("Pragma: no-cache");
-	header("Content-Type: text/html; charset=utf-8",true);
+	header( 'Content-Type: text/html; charset=utf-8' );	
 
   error_reporting(0);
   ini_set(“display_errors”, 0);
@@ -21,7 +21,7 @@
 				echo  ($informacoes->autor)."@";
 				echo  ($informacoes->palavras_chave)."@";
 				echo  ($informacoes->tipo)."@";
-				echo $informacoes->ano."@";
+				echo 	$informacoes->ano."@";
 		}
 	}
 ?>

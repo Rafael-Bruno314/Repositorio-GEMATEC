@@ -4,7 +4,7 @@ function  Add_genero(){
 	if (cat == "outro") {
 		var novo = prompt("Adicione um novo:");
 		if (novo == null || novo == "") {
-			alert("Imaginei...")
+			
 		} else {
 			Manda_categoria(novo);
 		}
