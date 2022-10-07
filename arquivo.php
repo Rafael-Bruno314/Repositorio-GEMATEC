@@ -59,7 +59,7 @@
     <script>w3.includeHTML();</script>
 
     <div class="container">
-	    <h1>Artigos, Trabalhos & Resumos GEMATEC</h1>
+	    <h1>Resumos de Analogia GEMATEC</h1>
       <hr>
 	    <form class="form-inline" name="frmBusca" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>?a=buscar">
         <div class="form-group">
